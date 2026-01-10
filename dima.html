@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brawl Stars - Все бравлеры (2017-2025)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1a1a2e;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 5px solid #ff9f00;
+            position: relative;
+            overflow: hidden;
+            animation: headerSlideIn 1s ease-out;
+        }
+        
+        @keyframes headerSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ffdb5c;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+            animation: logoSpin 3s infinite linear;
+        }
+        
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .year-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            animation: fadeIn 1.2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .year-btn {
+            padding: 8px 16px;
+            background-color: #2d3047;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .year-btn:hover, .year-btn.active {
+            background-color: #ff9f00;
+            color: #000;
+            transform: translateY(-2px) scale(1.05);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .search-box {
+            display: flex;
+            flex: 1;
+            max-width: 500px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px 0 0 25px;
+            background-color: #2d3047;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.5);
+            background-color: #3a3e5c;
+        }
+        
+        .search-box button {
+            padding: 12px 20px;
+            background-color: #ff9f00;
+            color: #000;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .search-box button:hover {
+            background-color: #ffb740;
+            transform: scale(1.05);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 12px 20px;
+            background-color: #2d3047;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #6a11cb;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff9f00;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #aaa;
+        }
+        
+        .brawlers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .brawler-card {
+            background: linear-gradient(145deg, #2d3047, #252738);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: cardAppear 0.6s forwards;
+        }
+        
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .brawler-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 159, 0, 0.3);
+        }
+        
+        .brawler-year {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: #ffdb5c;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+        
+        .brawler-card:hover .brawler-year {
+            background-color: rgba(255, 159, 0, 0.8);
+            color: #000;
+        }
+        
+        .brawler-image {
+            height: 200px;
+            background-color: #3a3e5c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brawler-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+        }
+        
+        .brawler-card:hover .brawler-image::after {
+            animation: shine 1.5s ease-out;
+        }
+        
+        @keyframes shine {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .brawler-image img {
+            max-height: 90%;
+            max-width: 90%;
+            object-fit: contain;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+        }
+        
+        .brawler-card:hover .brawler-image img {
+            transform: scale(1.15) rotate(5deg);
+        }
+        
+        .brawler-rarity {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+        
+        .brawler-card:hover .brawler-rarity {
+            transform: scale(1.1);
+        }
+        
+        .common { background-color: #a0a0a0; color: #000; }
+        .rare { background-color: #4CAF50; color: #fff; }
+        .super-rare { background-color: #2196F3; color: #fff; }
+        .epic { background-color: #9C27B0; color: #fff; }
+        .mythic { background-color: #FF9800; color: #000; }
+        .legendary { background-color: #FFEB3B; color: #000; }
+        .chromatic { background: linear-gradient(45deg, #FF4081, #7C4DFF); color: #fff; }
+        
+        .brawler-info {
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .brawler-card:hover .brawler-info {
+            background: linear-gradient(180deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.05));
+        }
+        
+        .brawler-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        
+        .brawler-card:hover .brawler-name {
+            color: #ffdb5c;
+            transform: translateX(5px);
+        }
+        
+        .brawler-class {
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: #6a11cb;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .brawler-card:hover .brawler-class {
+            background-color: #ff9f00;
+            color: #000;
+            transform: translateX(5px);
+        }
+        
+        .brawler-description {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            height: 60px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .brawler-card:hover .brawler-description {
+            color: #fff;
+        }
+        
+        .brawler-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .stat {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .brawler-card:hover .stat {
+            transform: translateY(-3px);
+        }
+        
+        .stat i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #ff9f00;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            animation: modalBgFadeIn 0.3s;
+        }
+        
+        @keyframes modalBgFadeIn {
+            from { background-color: rgba(0, 0, 0, 0); }
+            to { background-color: rgba(0, 0, 0, 0.9); }
+        }
+        
+        .modal-content {
+            background: linear-gradient(145deg, #2d3047, #252738);
+            margin: 50px auto;
+            max-width: 800px;
+            width: 90%;
+            border-radius: 15px;
+            overflow: hidden;
+            animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 159, 0, 0.2);
+        }
+        
+        @keyframes modalSlideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .modal-header {
+            padding: 20px 30px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+        }
+        
+        .modal-content:hover .modal-header::before {
+            animation: shine 1.5s ease-out;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close-modal {
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            color: #ff9f00;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .modal-brawler-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .modal-image {
+            flex: 1;
+            min-width: 250px;
+            background-color: #3a3e5c;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+            transform: translateX(-100%);
+        }
+        
+        .modal-content:hover .modal-image::after {
+            animation: shine 2s ease-out;
+        }
+        
+        .modal-image img {
+            max-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.7));
+            transition: transform 0.5s;
+        }
+        
+        .modal-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .modal-details {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .modal-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .modal-stat {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .modal-stat:hover {
+            background-color: rgba(106, 17, 203, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .modal-stat i {
+            font-size: 1.5rem;
+            color: #ff9f00;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 20px;
+            color: #aaa;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .brawlers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .modal-brawler-info {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .brawlers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/logo.png" alt="Brawl Stars Logo" class="logo pulse">
+            <h1>Полная энциклопедия бравлеров</h1>
+            <p class="subtitle">Все персонажи Brawl Stars с 2017 по 2025 год</p>
+        </header>
+        
+        <div class="year-filter">
+            <button class="year-btn active" data-year="all">Все годы</button>
+            <button class="year-btn" data-year="2017">2017</button>
+            <button class="year-btn" data-year="2018">2018</button>
+            <button class="year-btn" data-year="2019">2019</button>
+            <button class="year-btn" data-year="2020">2020</button>
+            <button class="year-btn" data-year="2021">2021</button>
+            <button class="year-btn" data-year="2022">2022</button>
+            <button class="year-btn" data-year="2023">2023</button>
+            <button class="year-btn" data-year="2024">2024</button>
+            <button class="year-btn" data-year="2025">2025</button>
+        </div>
+        
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Поиск бравлера по имени, классу или году...">
+                <button id="search-btn"><i class="fas fa-search"></i> Поиск</button>
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="common">Обычные</button>
+                <button class="filter-btn" data-filter="rare">Редкие</button>
+                <button class="filter-btn" data-filter="super-rare">Супер-редкие</button>
+                <button class="filter-btn" data-filter="epic">Эпические</button>
+                <button class="filter-btn" data-filter="mythic">Мифические</button>
+                <button class="filter-btn" data-filter="legendary">Легендарные</button>
+                <button class="filter-btn" data-filter="chromatic">Хроматические</button>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="total-brawlers">0</div>
+                <div class="stat-label">Всего бравлеров</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="legendary-count">0</div>
+                <div class="stat-label">Легендарных</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="chromatic-count">0</div>
+                <div class="stat-label">Хроматических</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="mythic-count">0</div>
+                <div class="stat-label">Мифических</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="newest-year">2025</div>
+                <div class="stat-label">Новейший год</div>
+            </div>
+        </div>
+        
+        <div class="brawlers-grid" id="brawlers-container">
+            <!-- Бравлеры будут загружены через JavaScript -->
+        </div>
+        
+        <footer>
+            <p>Brawl Stars &copy; Supercell. Данный сайт является фанатским проектом и не связан с Supercell.</p>
+            <p>Информация актуальна на 2025 год. Всего в игре представлено более 80 уникальных бравлеров.</p>
+        </footer>
+    </div>
+    
+    <!-- Модальное окно для детальной информации -->
+    <div class="modal" id="brawler-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-brawler-name">Имя бравлера</h2>
+                <span class="close-modal" id="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-brawler-info">
+                    <div class="modal-image">
+                        <img id="modal-brawler-img" src="" alt="Бравлер">
+                    </div>
+                    <div class="modal-details">
+                        <div class="brawler-class" id="modal-brawler-class">Класс</div>
+                        <div class="brawler-rarity" id="modal-brawler-rarity">Редкость</div>
+                        <div style="margin: 10px 0; padding: 5px 10px; background-color: rgba(255, 219, 92, 0.2); border-radius: 10px; display: inline-block;">
+                            Год выпуска: <span id="modal-brawler-year">2023</span>
+                        </div>
+                        <p class="modal-description" id="modal-brawler-description">Описание бравлера</p>
+                        
+                        <div class="modal-stats">
+                            <div class="modal-stat">
+                                <i class="fas fa-heart"></i>
+                                <div>Здоровье</div>
+                                <div class="stat-value" id="modal-health">0</div>
+                            </div>
+                            <div class="modal-stat">
+                                <i class="fas fa-bolt"></i>
+                                <div>Урон</div>
+                                <div class="stat-value" id="modal-damage">0</div>
+                            </div>
+                            <div class="modal-stat">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>Супер</div>
+                                <div class="stat-value" id="modal-super">0</div>
+                            </div>
+                            <div class="modal-stat">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <div>Скорость</div>
+                                <div class="stat-value" id="modal-speed">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Полные данные о всех бравлерах с 2017 по 2025 год
+        const brawlersData = [
+            // 2017 - Первые бравлеры при запуске игры
+            {
+                id: 1,
+                name: "Шелли",
+                year: 2017,
+                rarity: "common",
+                class: "Воин",
+                description: "Шелли атакует из своего дробовика стальными картечинами. Её Супер пробивает вражеские укрытия и отбрасывает противников.",
+                health: 5320,
+                damage: 336,
+                super: "Пробивает стены и отталкивает врагов",
+                speed: "Средняя",
+                color: "#FF9800",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/shelly.png"
+            },
+            {
+                id: 2,
+                name: "Кольт",
+                year: 2017,
+                rarity: "common",
+                class: "Стрелок",
+                description: "Кольт стреляет из револьверов длинной очередью. Его Супер выпускает ливень из пуль, которые разрушают всё на своём пути.",
+                health: 3640,
+                damage: 420,
+                super: "Быстрая очередь из 12 пуль",
+                speed: "Быстрая",
+                color: "#2196F3",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/colt.png"
+            },
+            {
+                id: 3,
+                name: "Булл",
+                year: 2017,
+                rarity: "rare",
+                class: "Танк",
+                description: "Булл стреляет из своего дробовика разрывными пулями. Его Супер позволяет ему протаранить врагов и укрытия.",
+                health: 7560,
+                damage: 448,
+                super: "Таран, разрушающий препятствия",
+                speed: "Средняя",
+                color: "#F44336",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/bull.png"
+            },
+            {
+                id: 4,
+                name: "Брок",
+                year: 2017,
+                rarity: "rare",
+                class: "Стрелок",
+                description: "Брок выпускает управляемые ракеты, которые наносят урон по области. Его Супер вызывает ракетный удар по большой территории.",
+                health: 3360,
+                damage: 1260,
+                super: "Ракетный обстрел территории",
+                speed: "Средняя",
+                color: "#4CAF50",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/brock.png"
+            },
+            {
+                id: 5,
+                name: "Эль Примо",
+                year: 2017,
+                rarity: "rare",
+                class: "Танк",
+                description: "Эль Примо наносит сокрушительные удары вблизи. Его Супер позволяет ему прыгнуть на большое расстояние и оглушить врагов.",
+                health: 8400,
+                damage: 504,
+                super: "Прыжок с оглушением",
+                speed: "Средняя",
+                color: "#FF5722",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/el-primo.png"
+            },
+            {
+                id: 6,
+                name: "Барли",
+                year: 2017,
+                rarity: "super-rare",
+                class: "Контроллер",
+                description: "Барли бросает бутылки с горючей жидкостью, которые создают зону огня. Его Супер покрывает большую площадь огнём.",
+                health: 3080,
+                damage: 1120,
+                super: "Огненный ливень",
+                speed: "Медленная",
+                color: "#8BC34A",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/barley.png"
+            },
+            {
+                id: 7,
+                name: "Поко",
+                year: 2017,
+                rarity: "super-rare",
+                class: "Лекарь",
+                description: "Поко атакует звуковыми волнами, которые проходят сквозь врагов. Его Супер лечит союзников и отталкивает врагов.",
+                health: 5600,
+                damage: 980,
+                super: "Исцеляющая волна",
+                speed: "Средняя",
+                color: "#E91E63",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/poco.png"
+            },
+            {
+                id: 8,
+                name: "Джесси",
+                year: 2017,
+                rarity: "super-rare",
+                class: "Конструктор",
+                description: "Джесси стреляет энергетическими сферами, которые отскакивают между врагами. Её Супер устанавливает турель, которая стреляет по врагам.",
+                health: 4200,
+                damage: 812,
+                super: "Турель для стрельбы",
+                speed: "Средняя",
+                color: "#FFC107",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/jessie.png"
+            },
+            {
+                id: 9,
+                name: "Нита",
+                year: 2017,
+                rarity: "super-rare",
+                class: "Воин",
+                description: "Нита атакует с помощью духовного медведя. Её Супер призывает медведя, который атакует врагов.",
+                health: 5320,
+                damage: 896,
+                super: "Призыв медведя",
+                speed: "Средняя",
+                color: "#795548",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/nita.png"
+            },
+            {
+                id: 10,
+                name: "Динамик",
+                year: 2017,
+                rarity: "epic",
+                class: "Контроллер",
+                description: "Динамик атакует звуковыми волнами, которые отталкивают врагов. Его Супер создаёт мощный звуковой импульс.",
+                health: 4760,
+                damage: 1260,
+                super: "Звуковая волна",
+                speed: "Средняя",
+                color: "#009688",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/dynamike.png"
+            },
+            {
+                id: 11,
+                name: "Тик",
+                year: 2017,
+                rarity: "epic",
+                class: "Контроллер",
+                description: "Тик бросает мину, которая взрывается на три части. Его Супер запускает ракету, которая разделяется на множество мин.",
+                health: 3360,
+                damage: 1120,
+                super: "Ракетный залп",
+                speed: "Медленная",
+                color: "#CDDC39",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/tick.png"
+            },
+            {
+                id: 12,
+                name: "8-БИТ",
+                year: 2017,
+                rarity: "epic",
+                class: "Стрелок",
+                description: "8-БИТ стреляет лазерными лучами. Его Супер устанавливает усилитель урона для союзников.",
+                health: 5600,
+                damage: 448,
+                super: "Усилитель урона",
+                speed: "Очень медленная",
+                color: "#3F51B5",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/8-bit.png"
+            },
+            {
+                id: 13,
+                name: "Рико",
+                year: 2017,
+                rarity: "super-rare",
+                class: "Стрелок",
+                description: "Рико стреляет пулями, которые отскакивают от стен. Его Супер выпускает шквал пуль, рикошетирующих от стен.",
+                health: 3640,
+                damage: 448,
+                super: "Шквал рикошетирующих пуль",
+                speed: "Быстрая",
+                color: "#F44336",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/rico.png"
+            },
+            {
+                id: 14,
+                name: "Дэррил",
+                year: 2017,
+                rarity: "super-rare",
+                class: "Танк",
+                description: "Дэррил стреляет из двух дробовиков одновременно. Его Супер сворачивается в шар и катится, сбивая врагов.",
+                health: 6720,
+                damage: 280,
+                super: "Катящийся шар-атака",
+                speed: "Средняя",
+                color: "#673AB7",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/darryl.png"
+            },
+            {
+                id: 15,
+                name: "Пенни",
+                year: 2017,
+                rarity: "super-rare",
+                class: "Стрелок",
+                description: "Пенни стреляет мешками с золотом, которые разлетаются на монеты при попадании. Её Супер устанавливает пушку, которая стреляет по врагам.",
+                health: 3920,
+                damage: 1120,
+                super: "Пушка поддержки",
+                speed: "Средняя",
+                color: "#FF9800",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/penny.png"
+            },
+            {
+                id: 16,
+                name: "Карл",
+                year: 2018,
+                rarity: "super-rare",
+                class: "Воин",
+                description: "Карл атакует киркой, которая возвращается к нему после броска. Его Супер запускает его вперёд, нанося урон врагам на пути.",
+                health: 5600,
+                damage: 980,
+                super: "Бросок вперёд с уроном",
+                speed: "Средняя",
+                color: "#795548",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/carl.png"
+            },
+            {
+                id: 17,
+                name: "Роса",
+                year: 2019,
+                rarity: "super-rare",
+                class: "Танк",
+                description: "Роса атакует короткими очередями из перчаток-кулаков. Её Супер создаёт защитный щит, уменьшающий получаемый урон.",
+                health: 6720,
+                damage: 476,
+                super: "Защитный щит",
+                speed: "Средняя",
+                color: "#9C27B0",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/rosa.png"
+            },
+            {
+                id: 18,
+                name: "Эмз",
+                year: 2019,
+                rarity: "mythic",
+                class: "Контроллер",
+                description: "Эмз атакует зарядами, которые накладывают эффект отравления. Её Супер замораживает врагов на месте.",
+                health: 4200,
+                damage: 560,
+                super: "Заморозка врагов",
+                speed: "Средняя",
+                color: "#00BCD4",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/emz.png"
+            },
+            {
+                id: 19,
+                name: "Мортис",
+                year: 2017,
+                rarity: "mythic",
+                class: "Убийца",
+                description: "Мортис атакует косулей, делая рывок к врагам. Его Супер выпускает стаю летучих мышей, которые восстанавливают здоровье.",
+                health: 4760,
+                damage: 1260,
+                super: "Стая летучих мышей",
+                speed: "Очень быстрая",
+                color: "#673AB7",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/mortis.png"
+            },
+            {
+                id: 20,
+                name: "Тара",
+                year: 2017,
+                rarity: "mythic",
+                class: "Контроллер",
+                description: "Тара стреляет картами, которые пронзают врагов. Её Супер создаёт чёрную дыру, которая притягивает врагов.",
+                health: 5320,
+                damage: 672,
+                super: "Чёрная дыру",
+                speed: "Средняя",
+                color: "#9C27B0",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/tara.png"
+            },
+            {
+                id: 21,
+                name: "Джин",
+                year: 2019,
+                rarity: "mythic",
+                class: "Лекарь",
+                description: "Джин стреляет сгустками магии, которые восстанавливают здоровье союзников. Его Супер притягивает или отталкивает врагов.",
+                health: 4200,
+                damage: 1120,
+                super: "Магическое притяжение",
+                speed: "Средняя",
+                color: "#FF9800",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/gene.png"
+            },
+            {
+                id: 22,
+                name: "Макс",
+                year: 2019,
+                rarity: "mythic",
+                class: "Воин",
+                description: "Макс стреляет энергетическими лучами. Её Супер увеличивает скорость передвижения для неё и союзников.",
+                health: 3640,
+                damage: 336,
+                super: "Ускорение для команды",
+                speed: "Очень быстрая",
+                color: "#00BCD4",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/max.png"
+            },
+            {
+                id: 23,
+                name: "Мистер П.",
+                year: 2020,
+                rarity: "mythic",
+                class: "Контроллер",
+                description: "Мистер П. бросает чемоданы, которые отскакивают от стен. Его Супер устанавливает портфельный станок, который атакует врагов.",
+                health: 4480,
+                damage: 560,
+                super: "Портфельный станок",
+                speed: "Средняя",
+                color: "#2196F3",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/mr-p.png"
+            },
+            {
+                id: 24,
+                name: "Спраут",
+                year: 2020,
+                rarity: "mythic",
+                class: "Контроллер",
+                description: "Спраут стреляет семенами, которые наносят урон. Его Супер создаёт стену, которая блокирует проход.",
+                health: 3920,
+                damage: 896,
+                super: "Стена-препятствие",
+                speed: "Медленная",
+                color: "#4CAF50",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/sprout.png"
+            },
+            {
+                id: 25,
+                name: "Байрон",
+                year: 2021,
+                rarity: "mythic",
+                class: "Лекарь",
+                description: "Байрон стреляет шприцами, которые лечат союзников или наносят урон врагам. Его Супер усиливает урон или лечение для цели.",
+                health: 3360,
+                damage: 560,
+                super: "Усиление урона/лечения",
+                speed: "Средняя",
+                color: "#9C27B0",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/byron.png"
+            },
+            {
+                id: 26,
+                name: "Леон",
+                year: 2018,
+                rarity: "legendary",
+                class: "Убийца",
+                description: "Леон стреляет сюрикенами, которые наносят большой урон вблизи. Его Супер делает его невидимым на некоторое время.",
+                health: 4480,
+                damage: 644,
+                super: "Невидимость",
+                speed: "Быстрая",
+                color: "#FFEB3B",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/leon.png"
+            },
+            {
+                id: 27,
+                name: "Ворон",
+                year: 2018,
+                rarity: "legendary",
+                class: "Убийца",
+                description: "Ворон бросает отравленные кинжалы, которые накладывают эффект яда. Его Супер позволяет ему прыгнуть в указанное место.",
+                health: 3640,
+                damage: 476,
+                super: "Прыжок с отравлением",
+                speed: "Быстрая",
+                color: "#9C27B0",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/crow.png"
+            },
+            {
+                id: 28,
+                name: "Спейк",
+                year: 2017,
+                rarity: "legendary",
+                class: "Контроллер",
+                description: "Спейк стреляет иглами кактуса, которые разлетаются в разные стороны. Его Супер создаёт поле с кактусами, замедляющее врагов.",
+                health: 3920,
+                damage: 672,
+                super: "Поле с кактусами",
+                speed: "Медленная",
+                color: "#4CAF50",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/spike.png"
+            },
+            {
+                id: 29,
+                name: "Сенди",
+                year: 2019,
+                rarity: "legendary",
+                class: "Контроллер",
+                description: "Сенди атакует песком, который ослепляет врагов. Её Супер создаёт песчаную бурю, которая усыпляет врагов.",
+                health: 4760,
+                damage: 1120,
+                super: "Песчаная буря",
+                speed: "Средняя",
+                color: "#FFC107",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/sandy.png"
+            },
+            {
+                id: 30,
+                name: "Эмбер",
+                year: 2020,
+                rarity: "chromatic",
+                class: "Стрелок",
+                description: "Эмбер стреляет огненной струёй, которая поджигает врагов. Её Супер создаёт стену огня, которая блокирует проход.",
+                health: 4200,
+                damage: 560,
+                super: "Стена огня",
+                speed: "Быстрая",
+                color: "#FF5722",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/amber.png"
+            },
+            {
+                id: 31,
+                name: "Гейл",
+                year: 2020,
+                rarity: "chromatic",
+                class: "Контроллер",
+                description: "Гейл стреляет снежками, которые отталкивают врагов. Его Супер создаёт снежный вихрь, который отбрасывает врагов.",
+                health: 3920,
+                damage: 504,
+                super: "Снежный вихрь",
+                speed: "Средняя",
+                color: "#00BCD4",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/gale.png"
+            },
+            {
+                id: 32,
+                name: "Сёрдж",
+                year: 2020,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Сёрдж стреляет энергетическими сгустками, которые разбиваются на несколько частей. Его Супер позволяет телепортироваться.",
+                health: 5600,
+                damage: 1120,
+                super: "Телепорт",
+                speed: "Средняя",
+                color: "#8BC34A",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/surge.png"
+            },
+            {
+                id: 33,
+                name: "Колетт",
+                year: 2020,
+                rarity: "chromatic",
+                class: "Убийца",
+                description: "Колетт атакует душой, нанося урон в процентах от здоровья врага. Её Супер позволяет ей проходить сквозь врагов и наносить урон.",
+                health: 4200,
+                damage: "24% от здоровья цели",
+                super: "Проход сквозь врагов",
+                speed: "Быстрая",
+                color: "#E91E63",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/colette.png"
+            },
+            {
+                id: 34,
+                name: "Лу",
+                year: 2021,
+                rarity: "chromatic",
+                class: "Контроллер",
+                description: "Лу стреляет ледяными сосульками, которые замедляют врагов. Его Супер создаёт ледяную зону, которая замораживает врагов.",
+                health: 3920,
+                damage: 560,
+                super: "Ледяная зона",
+                speed: "Средняя",
+                color: "#2196F3",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/lou.png"
+            },
+            {
+                id: 35,
+                name: "Белл",
+                year: 2021,
+                rarity: "chromatic",
+                class: "Стрелок",
+                description: "Белл стреляет снарядами, которые отскакивают между врагами. Её Супер призывает ловушку, которая оглушает врагов.",
+                health: 3640,
+                damage: 1260,
+                super: "Электро-ловушка",
+                speed: "Быстрая",
+                color: "#FF9800",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/belle.png"
+            },
+            {
+                id: 36,
+                name: "Эш",
+                year: 2021,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Эш атакует метлой, нанося урон вблизи. Его Супер призывает крысу, которая атакует врагов.",
+                health: 6720,
+                damage: 560,
+                super: "Призыв крысы-ассистента",
+                speed: "Средняя",
+                color: "#795548",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/ash.png"
+            },
+            {
+                id: 37,
+                name: "Мег",
+                year: 2021,
+                rarity: "chromatic",
+                class: "Воин",
+                description: "Мег стреляет лазерными лучами. Её Супер превращает её в робота с усиленными характеристиками.",
+                health: 4200,
+                damage: 560,
+                super: "Трансформация в робота",
+                speed: "Средняя",
+                color: "#F44336",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/meg.png"
+            },
+            {
+                id: 38,
+                name: "Базз",
+                year: 2021,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Базз атакует гарпуном, который притягивает врагов. Его Супер оглушает врагов в области.",
+                health: 5600,
+                damage: 1120,
+                super: "Оглушение области",
+                speed: "Средняя",
+                color: "#FFC107",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/buzz.png"
+            },
+            {
+                id: 39,
+                name: "Фенг",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Убийца",
+                description: "Фенг атакует клинками, которые наносят урон. Его Супер позволяет ему совершать быстрые рывки.",
+                health: 4480,
+                damage: 1260,
+                super: "Серия быстрых рывков",
+                speed: "Очень быстрая",
+                color: "#9C27B0",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/fang.png"
+            },
+            {
+                id: 40,
+                name: "Ив",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Контроллер",
+                description: "Ив стреляет яйцами, которые вылупляются в союзников. Её Супер создаёт зону, в которой союзники получают усиления.",
+                health: 3640,
+                damage: 560,
+                super: "Зона усиления",
+                speed: "Средняя",
+                color: "#4CAF50",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/eve.png"
+            },
+            {
+                id: 41,
+                name: "Джанет",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Стрелок",
+                description: "Джанет стреляет звуковыми волнами. Её Супер позволяет ей летать и сбрасывать бомбы на врагов.",
+                health: 3920,
+                damage: 1120,
+                super: "Полёт с бомбардировкой",
+                speed: "Средняя",
+                color: "#E91E63",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/janet.png"
+            },
+            {
+                id: 42,
+                name: "Бонни",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Стрелок",
+                description: "Бонни может переключаться между дальним и ближним режимом атаки. Её Супер позволяет ей катапультироваться в указанное место.",
+                health: 4200,
+                damage: 896,
+                super: "Катапульта",
+                speed: "Средняя",
+                color: "#FF9800",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/bonnie.png"
+            },
+            {
+                id: 43,
+                name: "Отис",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Контроллер",
+                description: "Отис стреляет чернильными снарядами, которые замедляют врагов. Его Супер накладывает на врага немоту, не давая использовать атаки.",
+                health: 3920,
+                damage: 560,
+                super: "Немота для врага",
+                speed: "Средняя",
+                color: "#3F51B5",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/otis.png"
+            },
+            {
+                id: 44,
+                name: "Сэм",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Сэм атакует кастетами в ближнем бою. Его Супер позволяет ему бросить кастеты, которые наносят урон при возвращении.",
+                health: 6720,
+                damage: 1260,
+                super: "Бросок кастетов",
+                speed: "Быстрая",
+                color: "#FF5722",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/sam.png"
+            },
+            {
+                id: 45,
+                name: "Гас",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Лекарь",
+                description: "Гас стреляет призрачными снарядами. Его Супер призывает призрака, который помогает в бою.",
+                health: 3640,
+                damage: 896,
+                super: "Призыв призрака",
+                speed: "Средняя",
+                color: "#673AB7",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/gus.png"
+            },
+            {
+                id: 46,
+                name: "Бустер",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Бустер атакует ударными волнами. Его Супер создаёт защитное поле для союзников.",
+                health: 7560,
+                damage: 560,
+                super: "Защитное поле",
+                speed: "Средняя",
+                color: "#009688",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/buster.png"
+            },
+            {
+                id: 47,
+                name: "Мэнди",
+                year: 2022,
+                rarity: "chromatic",
+                class: "Стрелок",
+                description: "Мэнди стреляет концентрированными лучами на дальние дистанции. Её Супер замедляет время для врагов в области.",
+                health: 3360,
+                damage: 1680,
+                super: "Замедление времени",
+                speed: "Медленная",
+                color: "#FFC107",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/mandy.png"
+            },
+            {
+                id: 48,
+                name: "Р-Т",
+                year: 2023,
+                rarity: "chromatic",
+                class: "Контроллер",
+                description: "Р-Т стреляет кнопками, которые прилипают к врагам и взрываются. Его Супер создаёт зону контроля, которая замедляет врагов.",
+                health: 4200,
+                damage: 1120,
+                super: "Зона контроля",
+                speed: "Средняя",
+                color: "#F44336",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/rt.png"
+            },
+            {
+                id: 49,
+                name: "Чак",
+                year: 2023,
+                rarity: "chromatic",
+                class: "Воин",
+                description: "Чак атакует на большой скорости, нанося удар при столкновении с врагами. Его Супер позволяет ему быстро перемещаться по карте.",
+                health: 4480,
+                damage: 1260,
+                super: "Сверхбыстрое перемещение",
+                speed: "Очень быстрая",
+                color: "#4CAF50",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/chuck.png"
+            },
+            {
+                id: 50,
+                name: "Мэйси",
+                year: 2023,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Мэйси атакует дробовиком, который отталкивает врагов. Её Супер создаёт защитную стену для союзников.",
+                health: 6720,
+                damage: 560,
+                super: "Защитная стена",
+                speed: "Средняя",
+                color: "#9C27B0",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/maisie.png"
+            },
+            {
+                id: 51,
+                name: "Хэнк",
+                year: 2023,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Хэнк стреляет пузырями, которые растут со временем и наносят больше урона. Его Супер создаёт огромный пузырь, который оглушает врагов.",
+                health: 7560,
+                damage: 1680,
+                super: "Оглушающий пузырь",
+                speed: "Медленная",
+                color: "#2196F3",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/hank.png"
+            },
+            {
+                id: 52,
+                name: "Перл",
+                year: 2023,
+                rarity: "chromatic",
+                class: "Стрелок",
+                description: "Перл стреляет горячими углями, которые наносят урон по области. Её Супер создаёт зону повышенной температуры, которая наносит урон врагам.",
+                health: 4200,
+                damage: 1120,
+                super: "Зона повышенной температуры",
+                speed: "Средняя",
+                color: "#FF5722",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/pearl.png"
+            },
+            {
+                id: 53,
+                name: "Даг",
+                year: 2024,
+                rarity: "chromatic",
+                class: "Воин",
+                description: "Даг атакует костями, которые наносят урон врагам. Его Супер призывает собаку, которая помогает в бою.",
+                health: 5600,
+                damage: 896,
+                super: "Призыв собаки",
+                speed: "Быстрая",
+                color: "#795548",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/doug.png"
+            },
+            {
+                id: 54,
+                name: "Ларри и Лори",
+                year: 2024,
+                rarity: "chromatic",
+                class: "Стрелок",
+                description: "Близнецы стреляют одновременно, нанося двойной урон. Их Супер позволяет им разделяться для одновременной атаки с двух сторон.",
+                health: 3640,
+                damage: 560,
+                super: "Разделение для двойной атаки",
+                speed: "Быстрая",
+                color: "#3F51B5",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/larry-lawrie.png"
+            },
+            {
+                id: 55,
+                name: "Мелоди",
+                year: 2024,
+                rarity: "chromatic",
+                class: "Контроллер",
+                description: "Мелоди атакует звуковыми волнами, которые наносят урон и оглушают врагов. Её Супер создаёт зону звукового резонанса.",
+                health: 3920,
+                damage: 1120,
+                super: "Зона звукового резонанса",
+                speed: "Средняя",
+                color: "#E91E63",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/melodie.png"
+            },
+            {
+                id: 56,
+                name: "Чарли",
+                year: 2024,
+                rarity: "chromatic",
+                class: "Контроллер",
+                description: "Чарли стреляет паутиной, которая замедляет и обездвиживает врагов. Её Супер создаёт большую паутину, которая ловит врагов.",
+                health: 3640,
+                damage: 560,
+                super: "Паутина-ловушка",
+                speed: "Средняя",
+                color: "#9C27B0",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/charlie.png"
+            },
+            {
+                id: 57,
+                name: "Кит",
+                year: 2024,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Кит атакует водяными потоками, которые отталкивают врагов. Его Супер создаёт приливную волну, которая смывает врагов.",
+                health: 7560,
+                damage: 560,
+                super: "Приливная волна",
+                speed: "Средняя",
+                color: "#2196F3",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/kit.png"
+            },
+            {
+                id: 58,
+                name: "Анжела",
+                year: 2024,
+                rarity: "chromatic",
+                class: "Лекарь",
+                description: "Анжела стреляет целебными лучами, которые лечат союзников. Её Супер создаёт зону восстановления для всей команды.",
+                health: 3360,
+                damage: 420,
+                super: "Зона восстановления",
+                speed: "Средняя",
+                color: "#FFC107",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/angela.png"
+            },
+            {
+                id: 59,
+                name: "Винсент",
+                year: 2024,
+                rarity: "chromatic",
+                class: "Убийца",
+                description: "Винсент атакует тенями, которые наносят урон и накладывают эффект страха. Его Супер позволяет ему сливаться с тенями для невидимости.",
+                health: 4480,
+                damage: 1260,
+                super: "Слияние с тенями",
+                speed: "Быстрая",
+                color: "#673AB7",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/vincent.png"
+            },
+            {
+                id: 60,
+                name: "Зои",
+                year: 2025,
+                rarity: "chromatic",
+                class: "Стрелок",
+                description: "Зои стреляет энергетическими зарядами, которые взрываются при попадании. Её Супер создаёт энергетическое поле, которое усиливает атаки союзников.",
+                health: 3920,
+                damage: 1120,
+                super: "Энергетическое поле усиления",
+                speed: "Быстрая",
+                color: "#FF4081",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/zoey.png"
+            },
+            {
+                id: 61,
+                name: "Рекс",
+                year: 2025,
+                rarity: "chromatic",
+                class: "Танк",
+                description: "Рекс атакует укусами в ближнем бою. Его Супер позволяет ему превращаться в динозавра с усиленными характеристиками.",
+                health: 8400,
+                damage: 1260,
+                super: "Трансформация в динозавра",
+                speed: "Средняя",
+                color: "#4CAF50",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/rex.png"
+            },
+            {
+                id: 62,
+                name: "Мия",
+                year: 2025,
+                rarity: "chromatic",
+                class: "Контроллер",
+                description: "Мия атакует магическими сферами, которые замедляют врагов. Её Супер создаёт магический барьер, который блокирует вражеские атаки.",
+                health: 3640,
+                damage: 896,
+                super: "Магический барьер",
+                speed: "Средняя",
+                color: "#9C27B0",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/mia.png"
+            },
+            {
+                id: 63,
+                name: "Джек",
+                year: 2025,
+                rarity: "chromatic",
+                class: "Воин",
+                description: "Джек атакует молотом, который наносит урон по области. Его Супер создаёт сейсмический удар, который оглушает врагов.",
+                health: 5600,
+                damage: 1120,
+                super: "Сейсмический удар",
+                speed: "Средняя",
+                color: "#795548",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/jack.png"
+            },
+            {
+                id: 64,
+                name: "Луна",
+                year: 2025,
+                rarity: "chromatic",
+                class: "Лекарь",
+                description: "Луна стреляет лунными лучами, которые лечат союзников и наносят урон врагам. Её Супер создаёт лунное сияние, которое усиливает всю команду.",
+                health: 3360,
+                damage: 560,
+                super: "Лунное сияние усиления",
+                speed: "Средняя",
+                color: "#FFC107",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/luna.png"
+            },
+            {
+                id: 65,
+                name: "Кай",
+                year: 2025,
+                rarity: "chromatic",
+                class: "Убийца",
+                description: "Кай атакует с помощью нунчаков, нанося быстрые удары. Его Супер позволяет ему совершать серию быстрых атак.",
+                health: 4480,
+                damage: 896,
+                super: "Серия быстрых атак",
+                speed: "Очень быстрая",
+                color: "#F44336",
+                icon: "https://cdn.jsdelivr.net/gh/michaelbromley/brawlstars-assets/images/brawlers/kai.png"
+            }
+        ];
+
+        // Функция для отображения бравлеров с анимацией
+        function renderBrawlers(brawlers) {
+            const container = document.getElementById('brawlers-container');
+            container.innerHTML = '';
+            
+            // Сбросим задержку анимации
+            let animationDelay = 0;
+            
+            brawlers.forEach((brawler, index) => {
+                const rarityClass = brawler.rarity;
+                const rarityText = getRarityText(brawler.rarity);
+                
+                const card = document.createElement('div');
+                card.className = 'brawler-card';
+                card.dataset.id = brawler.id;
+                card.dataset.rarity = brawler.rarity;
+                card.dataset.class = brawler.class;
+                card.dataset.year = brawler.year;
+                
+                // Устанавливаем задержку анимации для каждой карточки
+                card.style.animationDelay = `${animationDelay}ms`;
+                animationDelay += 50; // Каждая следующая карточка появляется с задержкой 50мс
+                
+                // Используем реальные иконки или заглушки
+                const iconUrl = brawler.icon || `https://via.placeholder.com/200x200/${brawler.color.substring(1)}/FFFFFF?text=${encodeURIComponent(brawler.name.substring(0, 10))}`;
+                
+                card.innerHTML = `
+                    <div class="brawler-year">${brawler.year}</div>
+                    <div class="brawler-image" style="background-color: ${brawler.color}">
+                        <div class="brawler-rarity ${rarityClass}">${rarityText}</div>
+                        <img src="${iconUrl}" alt="${brawler.name}" onerror="this.src='https://via.placeholder.com/200x200/${brawler.color.substring(1)}/FFFFFF?text=${encodeURIComponent(brawler.name.substring(0, 10))}'">
+                    </div>
+                    <div class="brawler-info">
+                        <h3 class="brawler-name">${brawler.name}</h3>
+                        <div class="brawler-class">${brawler.class}</div>
+                        <p class="brawler-description">${brawler.description}</p>
+                        <div class="brawler-stats">
+                            <div class="stat">
+                                <i class="fas fa-heart"></i>
+                                <div>${typeof brawler.health === 'number' ? brawler.health.toLocaleString() : brawler.health}</div>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-bolt"></i>
+                                <div>${typeof brawler.damage === 'number' ? brawler.damage.toLocaleString() : brawler.damage}</div>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <div>${brawler.speed}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => openModal(brawler));
+                container.appendChild(card);
+            });
+            
+            // Обновляем статистику
+            updateStats(brawlers);
+        }
+        
+        // Функция для получения текстового значения редкости
+        function getRarityText(rarity) {
+            const rarityMap = {
+                'common': 'Обычный',
+                'rare': 'Редкий',
+                'super-rare': 'Супер-редкий',
+                'epic': 'Эпический',
+                'mythic': 'Мифический',
+                'legendary': 'Легендарный',
+                'chromatic': 'Хроматический'
+            };
+            return rarityMap[rarity] || rarity;
+        }
+        
+        // Функция для обновления статистики
+        function updateStats(brawlers) {
+            document.getElementById('total-brawlers').textContent = brawlers.length;
+            document.getElementById('legendary-count').textContent = brawlers.filter(b => b.rarity === 'legendary').length;
+            document.getElementById('chromatic-count').textContent = brawlers.filter(b => b.rarity === 'chromatic').length;
+            document.getElementById('mythic-count').textContent = brawlers.filter(b => b.rarity === 'mythic').length;
+            
+            // Находим новейший год среди отфильтрованных бравлеров
+            if (brawlers.length > 0) {
+                const newestYear = Math.max(...brawlers.map(b => b.year));
+                document.getElementById('newest-year').textContent = newestYear;
+            }
+        }
+        
+        // Функция для открытия модального окна с информацией о бравлере
+        function openModal(brawler) {
+            const modal = document.getElementById('brawler-modal');
+            const rarityText = getRarityText(brawler.rarity);
+            
+            document.getElementById('modal-brawler-name').textContent = brawler.name;
+            document.getElementById('modal-brawler-class').textContent = brawler.class;
+            document.getElementById('modal-brawler-rarity').textContent = rarityText;
+            document.getElementById('modal-brawler-rarity').className = `brawler-rarity ${brawler.rarity}`;
+            document.getElementById('modal-brawler-year').textContent = brawler.year;
+            document.getElementById('modal-brawler-description').textContent = brawler.description;
+            document.getElementById('modal-health').textContent = typeof brawler.health === 'number' ? brawler.health.toLocaleString() : brawler.health;
+            document.getElementById('modal-damage').textContent = typeof brawler.damage === 'number' ? brawler.damage.toLocaleString() : brawler.damage;
+            document.getElementById('modal-super').textContent = brawler.super;
+            document.getElementById('modal-speed').textContent = brawler.speed;
+            
+            // Используем реальную иконку или заглушку
+            const iconUrl = brawler.icon || `https://via.placeholder.com/300x300/${brawler.color.substring(1)}/FFFFFF?text=${encodeURIComponent(brawler.name)}`;
+            document.getElementById('modal-brawler-img').src = iconUrl;
+            document.getElementById('modal-brawler-img').alt = brawler.name;
+            
+            modal.style.display = 'block';
+        }
+        
+        // Функция для фильтрации бравлеров по редкости
+        function filterBrawlersByRarity(filter) {
+            if (filter === 'all') {
+                return brawlersData;
+            }
+            return brawlersData.filter(brawler => brawler.rarity === filter);
+        }
+        
+        // Функция для фильтрации бравлеров по году
+        function filterBrawlersByYear(year) {
+            if (year === 'all') {
+                return brawlersData;
+            }
+            return brawlersData.filter(brawler => brawler.year.toString() === year);
+        }
+        
+        // Функция для поиска бравлеров
+        function searchBrawlers(query) {
+            const lowerQuery = query.toLowerCase();
+            return brawlersData.filter(brawler => 
+                brawler.name.toLowerCase().includes(lowerQuery) ||
+                brawler.class.toLowerCase().includes(lowerQuery) ||
+                brawler.description.toLowerCase().includes(lowerQuery) ||
+                brawler.year.toString().includes(lowerQuery)
+            );
+        }
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            // Отображаем всех бравлеров при загрузке
+            renderBrawlers(brawlersData);
+            
+            // Обработчики для фильтров по редкости
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Убираем активный класс у всех кнопок редкости
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Добавляем активный класс нажатой кнопке
+                    button.classList.add('active');
+                    
+                    const filter = button.dataset.filter;
+                    const filteredBrawlers = filterBrawlersByRarity(filter);
+                    
+                    // Применяем также фильтр по году, если он активен
+                    const activeYearBtn = document.querySelector('.year-btn.active');
+                    if (activeYearBtn && activeYearBtn.dataset.year !== 'all') {
+                        const yearFiltered = filteredBrawlers.filter(b => 
+                            b.year.toString() === activeYearBtn.dataset.year
+                        );
+                        renderBrawlers(yearFiltered);
+                    } else {
+                        renderBrawlers(filteredBrawlers);
+                    }
+                });
+            });
+            
+            // Обработчики для фильтров по году
+            const yearButtons = document.querySelectorAll('.year-btn');
+            yearButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Убираем активный класс у всех кнопок года
+                    yearButtons.forEach(btn => btn.classList.remove('active'));
+                    // Добавляем активный класс нажатой кнопке
+                    button.classList.add('active');
+                    
+                    const year = button.dataset.year;
+                    const filteredBrawlers = filterBrawlersByYear(year);
+                    
+                    // Применяем также фильтр по редкости, если он активен
+                    const activeFilterBtn = document.querySelector('.filter-btn.active');
+                    if (activeFilterBtn && activeFilterBtn.dataset.filter !== 'all') {
+                        const rarityFiltered = filteredBrawlers.filter(b => 
+                            b.rarity === activeFilterBtn.dataset.filter
+                        );
+                        renderBrawlers(rarityFiltered);
+                    } else {
+                        renderBrawlers(filteredBrawlers);
+                    }
+                });
+            });
+            
+            // Обработчик для поиска
+            document.getElementById('search-btn').addEventListener('click', () => {
+                const query = document.getElementById('search-input').value.trim();
+                const searchedBrawlers = searchBrawlers(query);
+                renderBrawlers(searchedBrawlers);
+                
+                // Сбрасываем фильтры при поиске
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+                
+                yearButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.year-btn[data-year="all"]').classList.add('active');
+            });
+            
+            // Поиск при нажатии Enter
+            document.getElementById('search-input').addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    document.getElementById('search-btn').click();
+                }
+            });
+            
+            // Закрытие модального окна
+            document.getElementById('close-modal').addEventListener('click', () => {
+                document.getElementById('brawler-modal').style.display = 'none';
+            });
+            
+            // Закрытие модального окна при клике вне его
+            window.addEventListener('click', (e) => {
+                const modal = document.getElementById('brawler-modal');
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

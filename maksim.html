@@ -1,0 +1,3353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warzone Meta Pro - Полная база сборок</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 80, 40, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 100, 50, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 136, 0.08) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 20px 0;
+            border-bottom: 3px solid #00ff88;
+            box-shadow: 0 4px 30px rgba(0, 255, 136, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ff88, #00cc6a, #00ff88, transparent);
+            animation: headerGlow 3s linear infinite;
+        }
+
+        @keyframes headerGlow {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .logo i {
+            color: #00ff88;
+            font-size: 2.8rem;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.7);
+            animation: logoSpin 10s linear infinite;
+        }
+
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #00ff88, #00cc6a, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            letter-spacing: 1px;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.4); }
+        }
+
+        .subtitle {
+            color: #8cffc6;
+            font-size: 1.2rem;
+            margin-left: 60px;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+            animation: subtitleFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes subtitleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* Mega Navigation */
+        .mega-nav {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .nav-main {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-main > li {
+            position: relative;
+        }
+
+        .nav-main > li > a {
+            color: #c0ffd8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            cursor: pointer;
+        }
+
+        .nav-main > li > a:hover {
+            background: rgba(0, 255, 136, 0.15);
+            color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            border-color: rgba(0, 255, 136, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .nav-main > li > a.active {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+            border-color: #00ff88;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(15, 15, 20, 0.98);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 300px;
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            animation: dropdownFade 0.3s ease-out;
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-main > li:hover .dropdown-menu {
+            display: grid;
+        }
+
+        .dropdown-section h4 {
+            color: #00ff88;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+            padding-bottom: 5px;
+        }
+
+        .dropdown-section a {
+            display: block;
+            color: #a0ffc8;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .dropdown-section a:hover {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            padding-left: 15px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin-top: 15px;
+            position: relative;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            padding-left: 45px;
+            background: rgba(0, 40, 20, 0.4);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 25px;
+            color: #00ff88;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+            border-color: #00ff88;
+        }
+
+        .search-bar::placeholder {
+            color: #80ffb3;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ff88;
+        }
+
+        /* Main Content */
+        .content-section {
+            margin: 50px 0;
+            padding: 40px;
+            background: rgba(20, 20, 25, 0.9);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: sectionAppear 0.8s ease-out;
+            scroll-margin-top: 120px;
+        }
+
+        @keyframes sectionAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 60%, rgba(0, 255, 136, 0.05));
+            pointer-events: none;
+        }
+
+        h2 {
+            color: #00ff88;
+            border-bottom: 3px solid #00cc6a;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2 i {
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .weapon-category {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 25px;
+            font-size: 1rem;
+            color: #00ff88;
+            border: 2px solid rgba(0, 255, 136, 0.4);
+            animation: categoryGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes categoryGlow {
+            0%, 100% { border-color: rgba(0, 255, 136, 0.4); }
+            50% { border-color: rgba(0, 255, 136, 0.8); }
+        }
+
+        /* Enhanced Weapon Grid */
+        .weapon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .weapon-card {
+            background: linear-gradient(145deg, #151515, #1a1a1a);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(0, 255, 136, 0.15);
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            height: 100%;
+            animation: cardFloat 6s ease-in-out infinite;
+            animation-delay: calc(var(--card-index) * 0.1s);
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .weapon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 60%, rgba(0, 255, 136, 0.08));
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .weapon-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(0, 255, 136, 0.3);
+            border-color: rgba(0, 255, 136, 0.6);
+            animation-play-state: paused;
+        }
+
+        .weapon-header {
+            padding: 25px;
+            background: linear-gradient(90deg, rgba(0, 40, 20, 0.6), rgba(0, 80, 40, 0.4));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid rgba(0, 255, 136, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .weapon-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #00ff88;
+            text-shadow: 0 0 12px rgba(0, 255, 136, 0.5);
+        }
+
+        .weapon-type {
+            background: linear-gradient(45deg, var(--tier-color), color-mix(in srgb, var(--tier-color) 80%, #000));
+            color: #000;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+            animation: tierPulse 3s infinite;
+        }
+
+        @keyframes tierPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4); }
+            50% { box-shadow: 0 4px 25px rgba(0, 255, 136, 0.7); }
+        }
+
+        .weapon-content {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .weapon-content p {
+            color: #b0ffd0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .attachments {
+            margin: 20px 0;
+            background: rgba(0, 25, 12, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            position: relative;
+        }
+
+        .attachments::before {
+            content: 'Аттачменты';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: rgba(0, 40, 20, 0.9);
+            padding: 0 10px;
+            color: #00ff88;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .attachment-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .attachment-item:hover {
+            background: rgba(0, 255, 136, 0.05);
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+
+        .attachment-item:last-child {
+            border-bottom: none;
+        }
+
+        .attachment-name {
+            color: #90ffb8;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .attachment-value {
+            color: #00ff88;
+            font-weight: 700;
+            text-align: right;
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+            font-size: 0.95rem;
+            margin-left: 15px;
+            flex-shrink: 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            text-align: center;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 15px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .stat:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.25);
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #00ff88;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover .stat-value {
+            transform: scale(1.2);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #80ffb3;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Meta Info Cards */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .meta-card {
+            background: linear-gradient(135deg, rgba(0, 40, 20, 0.6), rgba(0, 80, 40, 0.4));
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meta-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .meta-card h3 {
+            color: #00ff88;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Tips Grid */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .tip-card {
+            background: rgba(0, 30, 15, 0.6);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #00ff88;
+            transition: all 0.3s ease;
+            animation: tipAppear 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes tipAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .tip-card:nth-child(2) { animation-delay: 0.1s; }
+        .tip-card:nth-child(3) { animation-delay: 0.2s; }
+        .tip-card:nth-child(4) { animation-delay: 0.3s; }
+        .tip-card:nth-child(5) { animation-delay: 0.4s; }
+
+        .tip-card:hover {
+            background: rgba(0, 40, 20, 0.8);
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.15);
+        }
+
+        .tip-card i {
+            color: #00ff88;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .tip-card h4 {
+            color: #00ff88;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .tip-card p {
+            color: #b0ffd0;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 2px solid rgba(0, 255, 136, 0.3);
+            color: #90ffb8;
+            font-size: 1rem;
+            background: rgba(10, 10, 15, 0.95);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, #00cc6a, #00ff88, transparent);
+            animation: footerGlow 4s linear infinite;
+        }
+
+        @keyframes footerGlow {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+
+        .update-date {
+            color: #00ff88;
+            font-weight: 700;
+            margin-top: 15px;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+            animation: datePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes datePulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Glowing effects */
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: glowFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes glowFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -30px) scale(1.1); }
+            50% { transform: translate(-30px, 40px) scale(0.9); }
+            75% { transform: translate(40px, 30px) scale(1.05); }
+        }
+
+        .glow-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #00ff88 0%, transparent 70%);
+            top: 10%;
+            right: 10%;
+        }
+
+        .glow-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #006633 0%, transparent 70%);
+            bottom: 20%;
+            left: 5%;
+        }
+
+        .glow-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #00cc6a 0%, transparent 70%);
+            top: 50%;
+            left: 80%;
+        }
+
+        /* Tier Colors */
+        .tier-s { --tier-color: #ff3333; }
+        .tier-a { --tier-color: #ff9900; }
+        .tier-b { --tier-color: #00ff88; }
+        .tier-c { --tier-color: #0099ff; }
+        .tier-d { --tier-color: #9966ff; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 14px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111;
+            border-left: 1px solid rgba(0, 255, 136, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #006633, #00ff88, #006633);
+            border-radius: 7px;
+            border: 2px solid #111;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #00ff88, #006633, #00ff88);
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .weapon-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
+            .dropdown-menu {
+                min-width: 250px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content-section {
+                padding: 30px;
+            }
+            
+            .nav-main {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+            
+            .nav-main > li > a {
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .nav-main > li:hover .dropdown-menu {
+                display: grid;
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .weapon-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .logo i {
+                font-size: 2.2rem;
+            }
+            
+            .content-section {
+                padding: 20px;
+                margin: 30px 0;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .nav-main {
+                gap: 8px;
+            }
+            
+            .nav-main > li > a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .tips-grid,
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                margin-left: 0;
+                text-align: center;
+            }
+            
+            .weapon-name {
+                font-size: 1.4rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-main > li {
+                width: calc(50% - 4px);
+            }
+            
+            .nav-main > li > a {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .dropdown-menu {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Stats Popup */
+        .stats-popup {
+            position: absolute;
+            background: rgba(0, 30, 15, 0.95);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 1000;
+            display: none;
+            animation: popupAppear 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        @keyframes popupAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(0, 255, 136, 0.1);
+            border-top: 5px solid #00ff88;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            animation: fabPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes fabPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .fab:hover {
+            transform: scale(1.2) rotate(90deg);
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.6);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #00cc6a, #00ff88, #00cc6a);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+
+        /* Weapon ID anchors */
+        .weapon-anchor {
+            display: block;
+            position: relative;
+            top: -140px;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Background glowing effects -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+
+    <!-- Floating Action Button -->
+    <div class="fab" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-crosshairs"></i>
+                <h1>Warzone Meta Pro</h1>
+            </div>
+            <p class="subtitle">Полная энциклопедия мета-оружия, сборок и тактик Warzone 2.0</p>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-bar" placeholder="Поиск оружия, сборок или советов...">
+            </div>
+            
+            <!-- Mega Navigation -->
+            <nav class="mega-nav">
+                <ul class="nav-main">
+                    <li>
+                        <a href="#ar" class="active"><i class="fas fa-rifle"></i> AR</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-section">
+                                <h4>S-Tier Мета</h4>
+                                <a href="#tr76" class="dropdown-link">TR-76 Geist</a>
+                                <a href="#hemlock" class="dropdown-link">ISO Hemlock</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <h4>A-Tier Сильные</h4>
+                                <a href="#kastov" class="dropdown-link">Kastov 762</a>
+                                <a href="#taq56" class="dropdown-link">TAQ-56</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <h4>B-Tier Хорошие</h4>
+                                <a href="#m13b" class="dropdown-link">M13B</a>
+                                <a href="#m4" class="dropdown-link">M4</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#smg"><i class="fas fa-gun"></i> SMG</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-section">
+                                <h4>S-Tier Мета</h4>
+                                <a href="#lachmann" class="dropdown-link">Lachmann Sub</a>
+                                <a href="#vel46" class="dropdown-link">VEL 46</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <h4>A-Tier Сильные</h4>
+                                <a href="#iso45" class="dropdown-link">ISO 45</a>
+                                <a href="#fennec" class="dropdown-link">Fennec 45</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#sniper"><i class="fas fa-bullseye"></i> Снайперы</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-section">
+                                <h4>One-Shot</h4>
+                                <a href="#mcpr" class="dropdown-link">MCPR-300</a>
+                                <a href="#victus" class="dropdown-link">Victus XMR</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <h4>Марксмен</h4>
+                                <a href="#spr" class="dropdown-link">SP-R 208</a>
+                                <a href="#sa" class="dropdown-link">SA-B 50</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#pistols"><i class="fas fa-handgun"></i> Пистолеты</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-section">
+                                <h4>Автоматические</h4>
+                                <a href="#x13" class="dropdown-link">X13 Auto</a>
+                                <a href="#ftac" class="dropdown-link">FTAC Siege</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <h4>Револьверы</h4>
+                                <a href="#basilisk" class="dropdown-link">Basilisk</a>
+                                <a href="#magnum" class="dropdown-link">.50 GS</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#shotguns"><i class="fas fa-explosion"></i> Дробовики</a>
+                    </li>
+                    <li>
+                        <a href="#lmgs"><i class="fas fa-shield-alt"></i> Пулеметы</a>
+                    </li>
+                    <li>
+                        <a href="#marksman"><i class="fas fa-scope"></i> Марксмен</a>
+                    </li>
+                    <li>
+                        <a href="#loadouts"><i class="fas fa-layer-group"></i> Лоадауты</a>
+                    </li>
+                    <li>
+                        <a href="#perks"><i class="fas fa-star"></i> Перки</a>
+                    </li>
+                    <li>
+                        <a href="#tactics"><i class="fas fa-chess"></i> Тактики</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- AR Section -->
+        <section id="ar" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-rifle"></i> Штурмовые винтовки (AR) - 8 сборок</h2>
+                <span class="weapon-category">Основное оружие | Обновлено 24.10.2023</span>
+            </div>
+            
+            <div class="weapon-grid">
+                <!-- TR-76 Geist -->
+                <div class="weapon-anchor" id="tr76"></div>
+                <div class="weapon-card" style="--card-index: 0;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">TR-76 Geist</div>
+                        <div class="weapon-type tier-s">S-Tier Мета</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Абсолютный мета сезона 5. Отличное TTK, низкая отдача, высокая точность на всех дистанциях.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">BR209 Barrel</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Aim OP-V4</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">TR STOCK</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">45 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Heavy Support</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat" data-tooltip="Урон на средней дистанции">
+                                <div class="stat-value">9.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat" data-tooltip="Стабильность при стрельбе">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat" data-tooltip="Скорость передвижения">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat" data-tooltip="Общая оценка меты">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kastov 762 -->
+                <div class="weapon-anchor" id="kastov"></div>
+                <div class="weapon-card" style="--card-index: 1;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Kastov 762</div>
+                        <div class="weapon-type tier-a">A-Tier Урон</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Максимальный урон среди AR. Отлична для опытных игроков, требует контроля отдачи.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">KAS-10 584mm</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">SZ Recharge-DX</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Ivanov Wood Stock</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">40 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">VLK LZR 7MW</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat" data-tooltip="Самый высокий урон">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat" data-tooltip="Сложная отдача">
+                                <div class="stat-value">6/10</div>
+                                <div class="stat-label">Контроль</div>
+                            </div>
+                            <div class="stat" data-tooltip="Медленное передвижение">
+                                <div class="stat-value">5/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat" data-tooltip="Высокий потенциал">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ISO Hemlock -->
+                <div class="weapon-anchor" id="hemlock"></div>
+                <div class="weapon-card" style="--card-index: 2;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">ISO Hemlock</div>
+                        <div class="weapon-type tier-a">A-Tier Стабильность</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Невероятно стабильная винтовка с минимальной отдачей. Идеальный баланс характеристик.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">Fielder-T50</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Corio Eagleseye 2.5x</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Ravage-10</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">45 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">Commando Foregrip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat" data-tooltip="Хороший урон">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat" data-tooltip="Минимальная отдача">
+                                <div class="stat-value">9.5/10</div>
+                                <div class="stat-label">Стабильность</div>
+                            </div>
+                            <div class="stat" data-tooltip="Средняя скорость">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Управление</div>
+                            </div>
+                            <div class="stat" data-tooltip="Отличный выбор">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- TAQ-56 -->
+                <div class="weapon-anchor" id="taq56"></div>
+                <div class="weapon-card" style="--card-index: 3;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">TAQ-56</div>
+                        <div class="weapon-type tier-a">A-Tier Универсал</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Идеальна для всех дистанций. Низкая отдача, хороший урон, высокая точность.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">17.5" Tundra Pro</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">SZ Lonewolf Optic</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">TV Xline Pro</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">40 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">FSS Sharkfin 90</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- M13B -->
+                <div class="weapon-anchor" id="m13b"></div>
+                <div class="weapon-card" style="--card-index: 4;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">M13B</div>
+                        <div class="weapon-type tier-b">B-Tier Скорость</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Высокая скорострельность, отличная для средних дистанций. Быстрое убийство при точной стрельбе.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">14" Bruen Echelon</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">VLK 4.0 Optic</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Bruen R90 Factory</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">60 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">FTAC Ripper 56</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Скорость</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- M4 -->
+                <div class="weapon-anchor" id="m4"></div>
+                <div class="weapon-card" style="--card-index: 5;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">M4</div>
+                        <div class="weapon-type tier-b">B-Tier Классика</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Проверенная временем винтовка. Хороший баланс урона, точности и мобильности.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">Hightower 20"</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Cronen Mini Pro</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Tempus P80 Strike</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">60 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">FTAC Ripper 56</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SMG Section -->
+        <section id="smg" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-gun"></i> Пистолеты-пулеметы (SMG)</h2>
+                <span class="weapon-category">Ближний бой | 6 сборок</span>
+            </div>
+            
+            <div class="weapon-grid">
+                <!-- Lachmann Sub -->
+                <div class="weapon-anchor" id="lachmann"></div>
+                <div class="weapon-card" style="--card-index: 0;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Lachmann Sub</div>
+                        <div class="weapon-type tier-s">S-Tier Мета</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Король ближнего боя. Максимальная мобильность и TTK в CQB.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">L38 Falcon 226mm</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">1MW Pistol Laser</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Lachmann TCG-10</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">40 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Flash Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat" data-tooltip="Урон в ближнем бою">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat" data-tooltip="Скорость стрельбы">
+                                <div class="stat-value">9.5/10</div>
+                                <div class="stat-label">Скорость</div>
+                            </div>
+                            <div class="stat" data-tooltip="Подвижность и ADS">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat" data-tooltip="Общая оценка меты">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VEL 46 -->
+                <div class="weapon-anchor" id="vel46"></div>
+                <div class="weapon-card" style="--card-index: 1;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">VEL 46</div>
+                        <div class="weapon-type tier-a">A-Tier Универсальный</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Идеальный баланс скорости и урона. Отличная для агрессивного стиля.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">Schlager TTL-20</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Demo RXT Stock</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">50 Round Drum</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">VLK LZR 7MW</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Держатель:</span>
+                                <span class="attachment-value">XTEN Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Скорость</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ISO 45 -->
+                <div class="weapon-anchor" id="iso45"></div>
+                <div class="weapon-card" style="--card-index: 2;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">ISO 45</div>
+                        <div class="weapon-type tier-a">A-Tier Ближний бой</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Максимальная скорострельность. Уничтожает в ближнем бою за доли секунды.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">7" EX Raptor</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">FSS OLE-V Laser</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">ISO 45 Factory</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">45 Round Drum</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Flash Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Скорострельность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fennec 45 -->
+                <div class="weapon-anchor" id="fennec"></div>
+                <div class="weapon-card" style="--card-index: 3;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Fennec 45</div>
+                        <div class="weapon-type tier-b">B-Tier Скорострельный</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Невероятная скорострельность, быстрый TTK в упор. Требует контроля отдачи.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">ZLR 18" Deadfall</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">1mW Laser</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">40 Round Drum</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">FTAC C6 Carbine</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">Commando Foregrip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Скорость</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sniper Section -->
+        <section id="sniper" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bullseye"></i> Снайперские винтовки</h2>
+                <span class="weapon-category">Дальние дистанции | 4 сборки</span>
+            </div>
+            
+            <div class="weapon-grid">
+                <!-- MCPR-300 -->
+                <div class="weapon-anchor" id="mcpr"></div>
+                <div class="weapon-card" style="--card-index: 0;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">MCPR-300</div>
+                        <div class="weapon-type tier-s">S-Tier One-Shot</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Надежный one-shot kill в голову. Лучший выбор для снайперов.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">22" OMX-456</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Raptor-FVM40</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">FSS Merc Stock</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Патроны:</span>
+                                <span class="attachment-value">.300 Mag Explosive</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Q900 Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">4/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Victus XMR -->
+                <div class="weapon-anchor" id="victus"></div>
+                <div class="weapon-card" style="--card-index: 1;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Victus XMR</div>
+                        <div class="weapon-type tier-a">A-Tier Дальнобойный</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Лучшая баллистика и скорость пули. Идеальна для экстремальных дистанций.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">Mack 8 33.5"</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Schlager Night View</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">XTEN ERGO Stock</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Патроны:</span>
+                                <span class="attachment-value">.50 Cal Explosive</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Q900 Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Дальность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">3/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SP-R 208 -->
+                <div class="weapon-anchor" id="spr"></div>
+                <div class="weapon-card" style="--card-index: 2;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">SP-R 208</div>
+                        <div class="weapon-type tier-b">B-Tier Марксмен</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Быстрая болтовка для средних дистанций. Отличная мобильность для снайпера.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">XRK 208 Blast</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Forge Tac Delta 4</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">XRK SP-LITE 208</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">5 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Q900 Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pistols Section -->
+        <section id="pistols" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-handgun"></i> Пистолеты</h2>
+                <span class="weapon-category">Вторичное оружие | 6 сборок</span>
+            </div>
+            
+            <div class="weapon-grid">
+                <!-- X13 Auto -->
+                <div class="weapon-anchor" id="x13"></div>
+                <div class="weapon-card" style="--card-index: 0;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">X13 Auto</div>
+                        <div class="weapon-type tier-s pistol-badge">S-Tier Автомат</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Полностью автоматический пистолет. Невероятная скорострельность вблизи.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">XRK Sidewinder-6</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">33 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">1mW Pistol Laser</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Express Grip</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Компенсатор:</span>
+                                <span class="attachment-value">FT Steel Fire</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">6.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Скорость</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Basilisk -->
+                <div class="weapon-anchor" id="basilisk"></div>
+                <div class="weapon-card" style="--card-index: 1;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Basilisk</div>
+                        <div class="weapon-type tier-a pistol-badge">A-Tier Урон</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Револьвер с одним выстрелом в голову. Смертоносный при точной стрельбе.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">10.5" FTAC Arrow</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Патроны:</span>
+                                <span class="attachment-value">.500 Snake Shot</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">VLK LZR 7mW</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Прицел:</span>
+                                <span class="attachment-value">Cronen Mini Pro</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Спуск:</span>
+                                <span class="attachment-value">XRK Lighting Fire</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FTAC Siege -->
+                <div class="weapon-anchor" id="ftac"></div>
+                <div class="weapon-card" style="--card-index: 2;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">FTAC Siege</div>
+                        <div class="weapon-type tier-a pistol-badge">A-Tier Скорость</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Новый автоматический пистолет. Отличная стабильность и контроль отдачи.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">EXF Vorpal</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">72 Round Drum</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">1mW Quick Fire</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Компенсатор:</span>
+                                <span class="attachment-value">XRK Vex-7</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Express</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Скорость</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9.5/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- .50 GS -->
+                <div class="weapon-anchor" id="magnum"></div>
+                <div class="weapon-card" style="--card-index: 3;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">.50 GS</div>
+                        <div class="weapon-type tier-b pistol-badge">B-Tier Мощный</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Легендарный Desert Eagle. Максимальный урон за выстрел среди пистолетов.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">FORGE DX One-Forty</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">13 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">1mW Artemis</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Компенсатор:</span>
+                                <span class="attachment-value">VLK Koloss Flash</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Спуск:</span>
+                                <span class="attachment-value">Bruen Express</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">9.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">6.5/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shotguns Section -->
+        <section id="shotguns" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-explosion"></i> Дробовики</h2>
+                <span class="weapon-category">Экстремальный ближний бой | 3 сборки</span>
+            </div>
+            
+            <div class="weapon-grid">
+                <!-- KV Broadside -->
+                <div class="weapon-card" style="--card-index: 0;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">KV Broadside</div>
+                        <div class="weapon-type tier-s">S-Tier Автомат</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Полуавтоматический дробовик. Уничтожает в упор за один выстрел.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">SA Schlager 16"</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">25 Drum Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Боеприпасы:</span>
+                                <span class="attachment-value">12 Gauge Dragon's Breath</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Demo RXT Stock</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Sakin ZX Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">10/10</div>
+                                <div class="stat-label">Урон вблизи</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">4/10</div>
+                                <div class="stat-label">Дальность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">6/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bryson 890 -->
+                <div class="weapon-card" style="--card-index: 1;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Bryson 890</div>
+                        <div class="weapon-type tier-a">A-Tier Помповый</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Мощный помповый дробовик. Один выстрел - одно убийство вблизи.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">29.5" Rifled Barrel</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Боеприпасы:</span>
+                                <span class="attachment-value">12 Gauge Slug</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">FSS OLE-V Laser</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Bryson Tac-Elite</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">Lockgrip Precision-40</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">9.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Дальность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">5/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Expedite 12 -->
+                <div class="weapon-card" style="--card-index: 2;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Expedite 12</div>
+                        <div class="weapon-type tier-b">B-Tier Быстрый</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Быстрый полуавтоматический дробовик. Отличная скорострельность для CQB.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">Bryson Improved Choke</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Боеприпасы:</span>
+                                <span class="attachment-value">12 Gauge Buckshot</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Лазер:</span>
+                                <span class="attachment-value">1mW Quick Fire</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">8 Round Tube</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Expedite L Bolt</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">6/10</div>
+                                <div class="stat-label">Дальность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LMGs Section -->
+        <section id="lmgs" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-shield-alt"></i> Ручные пулеметы (LMG)</h2>
+                <span class="weapon-category">Подавление огня | 4 сборки</span>
+            </div>
+            
+            <div class="weapon-grid">
+                <!-- RAAL MG -->
+                <div class="weapon-card" style="--card-index: 0;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">RAAL MG</div>
+                        <div class="weapon-type tier-a">A-Tier Подавление</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Максимальный урон среди LMG. Отлична для удержания позиций.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">21" EXF Rhino</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Holsun 2.5x</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">XRK Pro Heavy</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">75 Round Belt</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Warrior Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">9.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">3/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RPK -->
+                <div class="weapon-card" style="--card-index: 1;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">RPK</div>
+                        <div class="weapon-type tier-a">A-Tier Универсал</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Идеальный баланс урона и мобильности. Лучший LMG для агрессивной игры.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">TAC 597 Barrel</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">VLK 4.0 Optic</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Kastovia RPK Stock</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">75 Round Drum</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">Bruen Warrior Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">6/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sakin MG38 -->
+                <div class="weapon-card" style="--card-index: 2;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Sakin MG38</div>
+                        <div class="weapon-type tier-b">B-Tier Стабильность</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Невероятно стабильный пулемет с минимальной отдачей. Идеален для новичков.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">Bruen Forge 20"</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Schlager 3.4x</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Sakin ZX Stock</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">100 Round Belt</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">FTAC Ripper 56</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Стабильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">4/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- HCR 56 -->
+                <div class="weapon-card" style="--card-index: 3;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">HCR 56</div>
+                        <div class="weapon-type tier-c">C-Tier Мобильный</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Самый мобильный LMG. Хороший выбор для игроков, ценящих подвижность.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">15.9" Bruen Baroque</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Cronen Mini Pro</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">HCR 56 Factory</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">60 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">Commando Foregrip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marksman Section -->
+        <section id="marksman" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-scope"></i> Марксменские винтовки</h2>
+                <span class="weapon-category">Средние дистанции | 4 сборки</span>
+            </div>
+            
+            <div class="weapon-grid">
+                <!-- SA-B 50 -->
+                <div class="weapon-anchor" id="sa"></div>
+                <div class="weapon-card" style="--card-index: 0;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">SA-B 50</div>
+                        <div class="weapon-type tier-a">A-Tier Быстрая</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Быстрая болтовка для средних дистанций. Отличная мобильность и ADS скорость.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">18.5" Forge Tac</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">SZ Sigma-IV</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">SA-B 50 Factory</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">10 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">Lockgrip Precision-40</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">9/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lockwood MK2 -->
+                <div class="weapon-card" style="--card-index: 1;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">Lockwood MK2</div>
+                        <div class="weapon-type tier-b">B-Tier Рычажный</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Рычажная винтовка с высоким уроном. Отлична для агрессивных снайперов.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">22" Buffalo Barrel</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">Cronen Mini Pro</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">Lockwood Bullseye</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">6 Round Cylinder</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Ручка:</span>
+                                <span class="attachment-value">Bruen Q900 Grip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">8.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- EBR-14 -->
+                <div class="weapon-card" style="--card-index: 2;">
+                    <div class="weapon-header">
+                        <div class="weapon-name">EBR-14</div>
+                        <div class="weapon-type tier-c">C-Tier Полуавтомат</div>
+                    </div>
+                    <div class="weapon-content">
+                        <p>Полуавтоматическая марксменка. Хороша для быстрой стрельбы по движущимся целям.</p>
+                        
+                        <div class="attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-name">Дуло:</span>
+                                <span class="attachment-value">22" Boremaster Barrel</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Оптика:</span>
+                                <span class="attachment-value">VLK 4.0 Optic</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Приклад:</span>
+                                <span class="attachment-value">FTAC Titan</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Магазин:</span>
+                                <span class="attachment-value">20 Round Mag</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-name">Подствольник:</span>
+                                <span class="attachment-value">Commando Foregrip</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">7.5/10</div>
+                                <div class="stat-label">Урон</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8/10</div>
+                                <div class="stat-label">Точность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Мобильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">7/10</div>
+                                <div class="stat-label">Мета</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loadouts Section -->
+        <section id="loadouts" class="content-section">
+            <h2><i class="fas fa-layer-group"></i> Лучшие лоадауты (10+ комбинаций)</h2>
+            
+            <div class="meta-grid">
+                <div class="meta-card">
+                    <h3><i class="fas fa-crown"></i> Мета-лоадаут #1</h3>
+                    <p><strong>Основное:</strong> TR-76 Geist (S-Tier)</p>
+                    <p><strong>Вторичное:</strong> Lachmann Sub (S-Tier)</p>
+                    <p><strong>Перки:</strong> Double Time, Bomb Squad, Fast Hands, Ghost</p>
+                    <p><strong>Тактика:</strong> Stun Grenade x2, Frag Grenade</p>
+                    <p><strong>Стиль:</strong> Агрессивный универсал</p>
+                </div>
+                
+                <div class="meta-card">
+                    <h3><i class="fas fa-snowflake"></i> Снайперский лоадаут</h3>
+                    <p><strong>Основное:</strong> MCPR-300 (S-Tier)</p>
+                    <p><strong>Вторичное:</strong> ISO Hemlock (A-Tier)</p>
+                    <p><strong>Перки:</strong> Overkill, Bomb Squad, Spotter, Bird's Eye</p>
+                    <p><strong>Тактика:</strong> Smoke Grenade, Heartbeat Sensor</p>
+                    <p><strong>Стиль:</strong> Дальняя дистанция</p>
+                </div>
+                
+                <div class="meta-card">
+                    <h3><i class="fas fa-fire"></i> Агрессивный лоадаут</h3>
+                    <p><strong>Основное:</strong> Kastov 762 (A-Tier)</p>
+                    <p><strong>Вторичное:</strong> X13 Auto (S-Tier)</p>
+                    <p><strong>Перки:</strong> Double Time, Tracker, Fast Hands, High Alert</p>
+                    <p><strong>Тактика:</strong> Flash Grenade, Throwing Knife</p>
+                    <p><strong>Стиль:</strong> Ближний бой</p>
+                </div>
+                
+                <div class="meta-card">
+                    <h3><i class="fas fa-shield-alt"></i> Оборонительный лоадаут</h3>
+                    <p><strong>Основное:</strong> RAAL MG (A-Tier)</p>
+                    <p><strong>Вторичное:</strong> Basilisk (A-Tier)</p>
+                    <p><strong>Перки:</strong> Battle Hardened, Bomb Squad, Resupply, Survivor</p>
+                    <p><strong>Тактика:</strong> Claymore, Gas Grenade</p>
+                    <p><strong>Стиль:</strong> Удержание позиций</p>
+                </div>
+                
+                <div class="meta-card">
+                    <h3><i class="fas fa-running"></i> Мобильный лоадаут</h3>
+                    <p><strong>Основное:</strong> VEL 46 (A-Tier)</p>
+                    <p><strong>Вторичное:</strong> Chimera (B-Tier)</p>
+                    <p><strong>Перки:</strong> Double Time, Tracker, Fast Hands, Quick Fix</p>
+                    <p><strong>Тактика:</strong> Stim, Throwing Knife</p>
+                    <p><strong>Стиль:</strong> Быстрая ротация</p>
+                </div>
+                
+                <div class="meta-card">
+                    <h3><i class="fas fa-users"></i> Командный лоадаут</h3>
+                    <p><strong>Основное:</strong> TAQ-56 (A-Tier)</p>
+                    <p><strong>Вторичное:</strong> KV Broadside (S-Tier)</p>
+                    <p><strong>Перки:</strong> Double Time, Strong Arm, Fast Hands, High Alert</p>
+                    <p><strong>Тактика:</strong> Smoke Grenade, Drill Charge</p>
+                    <p><strong>Стиль:</strong> Командная игра</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perks Section -->
+        <section id="perks" class="content-section">
+            <h2><i class="fas fa-star"></i> Система перков (Полный гайд)</h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-running"></i>
+                    <h4>Double Time</h4>
+                    <p>Удваивает продолжительность тактического спринта. Обязателен для агрессивных игроков.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Bomb Squad</h4>
+                    <p>Уменьшает урон от взрывчатки на 40%. Спасает от клайморов и гранат.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-strong"></i>
+                    <h4>Strong Arm</h4>
+                    <p>Увеличивает дальность броска тактических гранат на 30%. Показывает траекторию.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Fast Hands</h4>
+                    <p>Ускоряет перезарядку и смену оружия на 50%. Критически важен в ближнем бою.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-eye"></i>
+                    <h4>High Alert</h4>
+                    <p>Показывает направление, если враг прицелился в вас. Лучший перк для выживания.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-ghost"></i>
+                    <h4>Ghost</h4>
+                    <p>Скрывает от радаров и Heartbeat Sensor. Обязателен в поздних кругах.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-redo"></i>
+                    <h4>Resupply</h4>
+                    <p>Каждые 30 секунд получаете дополнительную тактическую гранату. Для оборонительной игры.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Quick Fix</h4>
+                    <p>Убийство врага сразу начинает регенерацию здоровья. Отлично для агрессивной игры.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-crosshairs"></i>
+                    <h4>Spotter</h4>
+                    <p>Позволяет видеть вражеское оборудование через стены. Полезно против камперов.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-bird"></i>
+                    <h4>Bird's Eye</h4>
+                    <p>Увеличивает обзор миникарты и показывает врагов при активации UAV.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tactics Section -->
+        <section id="tactics" class="content-section">
+            <h2><i class="fas fa-chess"></i> Продвинутые тактики и советы (25+ советов)</h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-mountain"></i>
+                    <h4>Контроль высоты</h4>
+                    <p>Всегда занимайте возвышенности. Это дает 360° обзор, тактическое преимущество и возможность отступления.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-rotate"></i>
+                    <h4>Ротация зоны</h4>
+                    <p>Начинайте движение к новой зоне за 60-90 секунд. Не ждите последнего момента - это смертельно.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-users"></i>
+                    <h4>Командная игра</h4>
+                    <p>В команде распределяйте роли: штурмовик, снайпер, поддержка. Используйте голосовой чат для координации.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-box-open"></i>
+                    <h4>Управление лутом</h4>
+                    <p>Носите минимум 8 пластин, 3 тактических гранаты, 2 летальных. Всегда имейте саморезы.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-sync-alt"></i>
+                    <h4>Режимы стрельбы</h4>
+                    <p>Используйте одиночный огонь на дальних дистанциях, автоматический - на средних и ближних.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-crosshairs"></i>
+                    <h4>Прицеливание в голову</h4>
+                    <p>Целитесь в голову - это сокращает TTK на 40-60%. Тренируйтесь в режиме практики.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Настройки игры</h4>
+                    <p>Оптимальные настройки: Field of View 100-110, ADS Sensitivity 0.85, отключите Motion Blur.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-route"></i>
+                    <h4>Планирование маршрута</h4>
+                    <p>Изучите карту, знайте позиции возрождения, точки лута и маршруты отступления.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Использование укрытий</h4>
+                    <p>Всегда перемещайтесь от укрытия к укрытию. Не бегите по открытой местности.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <i class="fas fa-volume-up"></i>
+                    <h4>Звуковая разведка</h4>
+                    <p>Используйте наушники. Звук шагов, перезарядки и ревела может спасти жизнь.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Warzone Meta Pro - Полная энциклопедия для профессиональных игроков Warzone 2.0</p>
+            <p class="update-date">Актуально на: Октябрь 2023 | Сезон 5 Релоадед | Патч 1.35.2</p>
+            <p>Данные обновляются в реальном времени на основе статистики топ-100 игроков</p>
+            <div style="margin-top: 20px; color: #00ff88;">
+                <i class="fas fa-sync-alt"></i> Автообновление | 
+                <i class="fas fa-chart-line"></i> Статистика | 
+                <i class="fas fa-tools"></i> Калькулятор сборок |
+                <i class="fas fa-video"></i> Видео-гайды
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            loading.style.opacity = '0';
+            setTimeout(() => {
+                loading.style.display = 'none';
+            }, 500);
+        });
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Main navigation smooth scrolling
+        document.querySelectorAll('.nav-main > li > a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 120,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-main > li > a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Add ripple effect
+                    const ripple = document.createElement('div');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(0, 255, 136, 0.3);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
+                    
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                }
+            });
+        });
+
+        // Dropdown navigation smooth scrolling
+        document.querySelectorAll('.dropdown-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    // Find the parent weapon card
+                    let weaponCard = targetElement.nextElementSibling;
+                    while(weaponCard && !weaponCard.classList.contains('weapon-card')) {
+                        weaponCard = weaponCard.nextElementSibling;
+                    }
+                    
+                    if(weaponCard) {
+                        // Scroll to the weapon card with offset
+                        const section = weaponCard.closest('.content-section');
+                        const sectionTop = section.offsetTop;
+                        const cardOffset = weaponCard.offsetTop - section.offsetTop;
+                        
+                        window.scrollTo({
+                            top: sectionTop + cardOffset - 140,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Highlight the weapon card
+                        weaponCard.style.boxShadow = '0 0 40px rgba(0, 255, 136, 0.5)';
+                        weaponCard.style.borderColor = '#00ff88';
+                        
+                        setTimeout(() => {
+                            weaponCard.style.boxShadow = '';
+                            weaponCard.style.borderColor = '';
+                        }, 2000);
+                    }
+                    
+                    // Update active nav link
+                    const parentSection = targetElement.closest('.dropdown-menu').previousElementSibling;
+                    document.querySelectorAll('.nav-main > li > a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    if(parentSection) {
+                        parentSection.classList.add('active');
+                    }
+                    
+                    // Close dropdown on mobile
+                    if(window.innerWidth <= 1024) {
+                        const dropdown = this.closest('.dropdown-menu');
+                        if(dropdown) {
+                            dropdown.style.display = 'none';
+                        }
+                    }
+                }
+            });
+        });
+
+        // Highlight current section on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.nav-main > li > a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if(scrollY >= (sectionTop - 200)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Weapon card animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.weapon-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(40px) scale(0.95)';
+                card.style.animationDelay = (index * 0.1) + 's';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0) scale(1)';
+                }, 100 * index);
+            });
+
+            // Search functionality
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                if(searchTerm.length < 2) {
+                    // Show all if search term is too short
+                    document.querySelectorAll('.weapon-card, .tip-card, .meta-card').forEach(card => {
+                        card.style.display = 'block';
+                        card.style.animation = '';
+                    });
+                    return;
+                }
+                
+                const cards = document.querySelectorAll('.weapon-card, .tip-card, .meta-card');
+                let foundAny = false;
+                
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    const weaponName = card.querySelector('.weapon-name');
+                    const cardTitle = card.querySelector('h3, h4') || weaponName;
+                    
+                    if(text.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        card.style.animation = 'searchHighlight 0.5s ease';
+                        foundAny = true;
+                        
+                        // Highlight matching text in weapon names
+                        if(cardTitle && cardTitle.textContent.toLowerCase().includes(searchTerm)) {
+                            const originalText = cardTitle.textContent;
+                            const regex = new RegExp(`(${searchTerm})`, 'gi');
+                            const highlighted = originalText.replace(regex, '<span style="color:#00ff88;text-shadow:0 0 10px rgba(0,255,136,0.7)">$1</span>');
+                            cardTitle.innerHTML = highlighted;
+                        }
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show message if nothing found
+                let message = document.getElementById('search-no-results');
+                if(!foundAny && cards.length > 0) {
+                    if(!message) {
+                        message = document.createElement('div');
+                        message.id = 'search-no-results';
+                        message.style.cssText = `
+                            text-align: center;
+                            padding: 40px;
+                            color: #00ff88;
+                            font-size: 1.2rem;
+                            grid-column: 1 / -1;
+                        `;
+                        message.textContent = `Ничего не найдено по запросу: "${searchTerm}"`;
+                        const firstGrid = document.querySelector('.weapon-grid, .tips-grid, .meta-grid');
+                        if(firstGrid) {
+                            firstGrid.parentNode.insertBefore(message, firstGrid);
+                        }
+                    }
+                } else if(message) {
+                    message.remove();
+                }
+                
+                // Add search highlight animation
+                if(!document.querySelector('#searchHighlightStyle')) {
+                    const style = document.createElement('style');
+                    style.id = 'searchHighlightStyle';
+                    style.textContent = `
+                        @keyframes searchHighlight {
+                            0% { background-color: transparent; }
+                            50% { background-color: rgba(0, 255, 136, 0.2); }
+                            100% { background-color: transparent; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            });
+
+            // Clear search on Escape
+            searchBar.addEventListener('keydown', function(e) {
+                if(e.key === 'Escape') {
+                    this.value = '';
+                    this.dispatchEvent(new Event('input'));
+                }
+            });
+
+            // Stats tooltips
+            const stats = document.querySelectorAll('.stat[data-tooltip]');
+            stats.forEach(stat => {
+                stat.addEventListener('mouseenter', function(e) {
+                    const tooltip = this.getAttribute('data-tooltip');
+                    const tooltipEl = document.createElement('div');
+                    tooltipEl.className = 'stats-popup';
+                    tooltipEl.textContent = tooltip;
+                    tooltipEl.style.left = e.pageX + 'px';
+                    tooltipEl.style.top = e.pageY - 60 + 'px';
+                    document.body.appendChild(tooltipEl);
+                    tooltipEl.style.display = 'block';
+                    
+                    const moveHandler = (e) => {
+                        tooltipEl.style.left = e.pageX + 15 + 'px';
+                        tooltipEl.style.top = e.pageY - 60 + 'px';
+                    };
+                    
+                    this.addEventListener('mousemove', moveHandler);
+                    
+                    this.addEventListener('mouseleave', function() {
+                        this.removeEventListener('mousemove', moveHandler);
+                        tooltipEl.remove();
+                    }, { once: true });
+                });
+            });
+
+            // Auto-update date
+            const updateDate = document.querySelector('.update-date');
+            const now = new Date();
+            const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 
+                          'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+            updateDate.textContent = `Актуально на: ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()} | Сезон 5 Релоадед | Патч 1.35.2`;
+
+            // Random weapon stats update simulation
+            setInterval(() => {
+                const weaponTypes = document.querySelectorAll('.weapon-type');
+                if(Math.random() > 0.8 && weaponTypes.length > 0) {
+                    const randomWeapon = weaponTypes[Math.floor(Math.random() * weaponTypes.length)];
+                    randomWeapon.style.animation = 'none';
+                    setTimeout(() => {
+                        randomWeapon.style.animation = 'tierPulse 3s infinite';
+                    }, 10);
+                }
+            }, 3000);
+
+            // Add floating particles
+            createFloatingParticles();
+        });
+
+        // Floating particles effect
+        function createFloatingParticles() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+            `;
+            document.body.appendChild(particlesContainer);
+
+            for(let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 4 + 1}px;
+                    height: ${Math.random() * 4 + 1}px;
+                    background: rgba(0, 255, 136, ${Math.random() * 0.3 + 0.1});
+                    border-radius: 50%;
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    animation: particleFloat ${Math.random() * 20 + 10}s linear infinite;
+                `;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes particleFloat {
+                        0% {
+                            transform: translate(0, 0) rotate(0deg);
+                            opacity: ${Math.random() * 0.5 + 0.2};
+                        }
+                        100% {
+                            transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(360deg);
+                            opacity: ${Math.random() * 0.5 + 0.2};
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Add celebration effect
+            const fab = document.querySelector('.fab');
+            fab.innerHTML = '<i class="fas fa-check"></i>';
+            fab.style.background = 'linear-gradient(135deg, #00cc6a, #00ff88)';
+            
+            setTimeout(() => {
+                fab.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                fab.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
+            }, 1000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+F for search
+            if(e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                document.querySelector('.search-bar').focus();
+            }
+            
+            // Escape to clear search
+            if(e.key === 'Escape') {
+                const searchBar = document.querySelector('.search-bar');
+                if(document.activeElement === searchBar) {
+                    searchBar.value = '';
+                    searchBar.dispatchEvent(new Event('input'));
+                }
+            }
+            
+            // Number keys for sections
+            if(e.key >= '1' && e.key <= '9') {
+                const sections = ['#ar', '#smg', '#sniper', '#pistols', '#shotguns', '#lmgs', '#marksman', '#loadouts', '#perks'];
+                const index = parseInt(e.key) - 1;
+                if(sections[index]) {
+                    const element = document.querySelector(sections[index]);
+                    if(element) {
+                        element.scrollIntoView({behavior: 'smooth'});
+                    }
+                }
+            }
+        });
+
+        // Add ripple effect style
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Parallax effect for glows
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const glows = document.querySelectorAll('.glow');
+            
+            glows.forEach((glow, index) => {
+                const rate = scrolled * (0.2 + index * 0.05);
+                glow.style.transform = `translate(0, ${rate}px)`;
+            });
+        });
+
+        // Weapon card click effect
+        document.querySelectorAll('.weapon-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Handle URL hash on page load
+        window.addEventListener('load', function() {
+            if(window.location.hash) {
+                const hash = window.location.hash;
+                const element = document.querySelector(hash);
+                if(element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({behavior: 'smooth'});
+                        
+                        // If it's a weapon anchor, highlight the card
+                        if(element.classList.contains('weapon-anchor')) {
+                            const weaponCard = element.nextElementSibling;
+                            if(weaponCard && weaponCard.classList.contains('weapon-card')) {
+                                weaponCard.style.boxShadow = '0 0 40px rgba(0, 255, 136, 0.5)';
+                                weaponCard.style.borderColor = '#00ff88';
+                                
+                                setTimeout(() => {
+                                    weaponCard.style.boxShadow = '';
+                                    weaponCard.style.borderColor = '';
+                                }, 3000);
+                            }
+                        }
+                    }, 500);
+                }
+            }
+        });
+
+        // Mobile menu improvements
+        document.addEventListener('click', function(e) {
+            // Close dropdown when clicking outside on mobile
+            if(window.innerWidth <= 1024) {
+                const dropdowns = document.querySelectorAll('.dropdown-menu');
+                const navLinks = document.querySelectorAll('.nav-main > li > a');
+                
+                let clickedInsideDropdown = false;
+                dropdowns.forEach(dropdown => {
+                    if(dropdown.contains(e.target)) {
+                        clickedInsideDropdown = true;
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    if(link.contains(e.target)) {
+                        clickedInsideDropdown = true;
+                    }
+                });
+                
+                if(!clickedInsideDropdown) {
+                    dropdowns.forEach(dropdown => {
+                        dropdown.style.display = 'none';
+                    });
+                }
+            }
+        });
+
+        // Handle dropdown menu hover on touch devices
+        let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if(isTouchDevice) {
+            document.querySelectorAll('.nav-main > li').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if(window.innerWidth > 1024) {
+                        const dropdown = this.querySelector('.dropdown-menu');
+                        if(dropdown) {
+                            const isVisible = dropdown.style.display === 'grid';
+                            document.querySelectorAll('.dropdown-menu').forEach(d => {
+                                d.style.display = 'none';
+                            });
+                            if(!isVisible) {
+                                dropdown.style.display = 'grid';
+                            }
+                            e.stopPropagation();
+                        }
+                    }
+                });
+            });
+            
+            // Close dropdowns when clicking elsewhere
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+                    dropdown.style.display = 'none';
+                });
+            });
+        }
+    </script>
+</body>
+</html>

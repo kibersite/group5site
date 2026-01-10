@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft в браузере</title>
+    <script type="text/javascript" src="/86AAF7CD-A199-463A-BEEF-AEE7400B3F0D/main.js?attr=vqxIx8EHV6tWFo1zfXuLyWwD1OX2QXuOn5f26C4auffF2BpvH1bkWjsiwu4_kaWwsZwQPJLr7hxNZUJedh1942Y6422oavYB1ncsUk-1GI2pZnt4Bg8jCCJ7Qbvqj8Ai0g6rX-slaNc74k39ZBxpkik38VD0YrpeeUIjGkN4sEF2C6O4pLN8RT7aLzzdaO-hkg75XX2s6uOCW0xcnOgs4ga7i9CdRrZc-sU2PNH3fG3O8ZkwZpRi1YI_g_Fviwfw_aCKEgNMYdBiAIRXXXCZ3Zvv7cSxPeFo8jJloJJUCwrRByLL0WXjBCrqImNFkHxWbyjM2vlf_81sTMs1sP-5wznhTAEEk5yWTiMsXWhtDkNK-JBLGGpBtANLphpqPfnszfsfJtto8QwCDopWvDPRWmNgKwZiedoGKDBn6OYgNTFRd_lP9q4B5L_oFK9jtf5LrK7O0BXcvvj0cSF3dGY6VvwHzHGR3FgSaDOi_21LtCd00XbGY5O7h_9EhJRuCyeELY6dR5wuzlZbbySztd75fJfrWbnd0sRnm9d0MdtJ4ozX69LBLYe4voYhlfE3_YaxPShO3naNM88ejcPp5tzuxLsEFCGlRbGLc0BKSr4r6JAmp52qFbBtNyeo4DGAuVs02lmWdx-TW3KVA8fDmX3y-urit8nXWzF85cBWXbcmaYOOpHiTMH1jsmSl7D31fkEyoEV_2cga3A-WSdi02srZ9CPlnwOTbRC6134Bjh6yp3xFlZERTv2MyoXoAPOiPjmQwvwGYtiNQCo4LE4bIPHpw4d9LQ9URaW4p01XELm-F7IpeKAvmP4l_QHpnWZ1knAHtW9tCa2ZS03mnmq5YolRXx99jJIsC-l2pkket4ZPN0fXvM6a1FZMndqs-V9JafD4" charset="UTF-8"></script><style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(#87CEEB, #98FB98);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            text-align: center;
+        }
+        
+        canvas {
+            border: 3px solid #8B4513;
+            background-color: #87CEEB;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        #controls {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background: #A0522D;
+        }
+        
+        #blockInfo {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .instructions {
+            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <h1>Браузерный Minecraft</h1>
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="controls">
+            <div>
+                <button id="grass">Трава</button>
+                <button id="dirt">Земля</button>
+                <button id="stone">Камень</button>
+                <button id="wood">Дерево</button>
+                <button id="leaves">Листья</button>
+                <button id="remove">Удалить блок</button>
+            </div>
+            <button id="clear">Очистить мир</button>
+            <div id="blockInfo">Выбран: Трава</div>
+        </div>
+        
+        <div class="instructions">
+            <p>Управление: ЛКМ - ставить блок, ПКМ - удалять блок</p>
+            <p>Выберите тип блока и стройте!</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Размеры
+        canvas.width = 800;
+        canvas.height = 600;
+        
+        // Настройки мира
+        const BLOCK_SIZE = 40;
+        const WORLD_WIDTH = 20;
+        const WORLD_HEIGHT = 15;
+        
+        // Типы блоков
+        const BLOCKS = {
+            grass: { color: '#7CFC00', name: 'Трава' },
+            dirt: { color: '#8B4513', name: 'Земля' },
+            stone: { color: '#808080', name: 'Камень' },
+            wood: { color: '#8B4513', name: 'Дерево' },
+            leaves: { color: '#228B22', name: 'Листья' },
+            empty: { color: '#87CEEB', name: 'Пусто' }
+        };
+        
+        // Инициализация мира
+        let world = [];
+        let selectedBlock = 'grass';
+        
+        // Создание начального мира
+        function createWorld() {
+            world = [];
+            for (let y = 0; y < WORLD_HEIGHT; y++) {
+                world[y] = [];
+                for (let x = 0; x < WORLD_WIDTH; x++) {
+                    if (y > WORLD_HEIGHT - 3) {
+                        // Земля и трава
+                        if (y === WORLD_HEIGHT - 3) {
+                            world[y][x] = 'grass';
+                        } else if (y === WORLD_HEIGHT - 2) {
+                            world[y][x] = 'dirt';
+                        } else {
+                            world[y][x] = 'dirt';
+                        }
+                    } else {
+                        // Небо
+                        world[y][x] = 'empty';
+                    }
+                }
+            }
+            
+            // Добавим несколько деревьев
+            for (let x = 3; x < WORLD_WIDTH; x += 5) {
+                if (x < WORLD_WIDTH - 2) {
+                    const treeY = WORLD_HEIGHT - 3;
+                    world[treeY - 1][x] = 'wood';
+                    world[treeY - 2][x] = 'wood';
+                    world[treeY - 3][x] = 'wood';
+                    
+                    // Листья дерева
+                    for (let ly = treeY - 4; ly <= treeY - 3; ly++) {
+                        for (let lx = x - 1; lx <= x + 1; lx++) {
+                            if (lx >= 0 && lx < WORLD_WIDTH && ly >= 0) {
+                                world[ly][lx] = 'leaves';
+                            }
+                        }
+                    }
+                    if (treeY - 5 >= 0) {
+                        world[treeY - 5][x] = 'leaves';
+                    }
+                }
+            }
+        }
+        
+        // Рисование мира
+        function drawWorld() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Рисуем фон (небо)
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Рисуем блоки
+            for (let y = 0; y < WORLD_HEIGHT; y++) {
+                for (let x = 0; x < WORLD_WIDTH; x++) {
+                    const blockType = world[y][x];
+                    if (blockType !== 'empty') {
+                        const block = BLOCKS[blockType];
+                        
+                        // Основной цвет блока
+                        ctx.fillStyle = block.color;
+                        ctx.fillRect(
+                            x * BLOCK_SIZE, 
+                            y * BLOCK_SIZE, 
+                            BLOCK_SIZE, 
+                            BLOCK_SIZE
+                        );
+                        
+                        // Тень для 3D эффекта
+                        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+                        ctx.fillRect(
+                            x * BLOCK_SIZE, 
+                            y * BLOCK_SIZE, 
+                            BLOCK_SIZE, 
+                            2
+                        );
+                        
+                        // Свет для 3D эффекта
+                        ctx.fillStyle = 'rgba(255,255,255,0.1)';
+                        ctx.fillRect(
+                            x * BLOCK_SIZE, 
+                            y * BLOCK_SIZE + BLOCK_SIZE - 2, 
+                            BLOCK_SIZE, 
+                            2
+                        );
+                        
+                        // Границы блоков
+                        ctx.strokeStyle = '#000';
+                        ctx.lineWidth = 1;
+                        ctx.strokeRect(
+                            x * BLOCK_SIZE, 
+                            y * BLOCK_SIZE, 
+                            BLOCK_SIZE, 
+                            BLOCK_SIZE
+                        );
+                    }
+                }
+            }
+            
+            // Сетка для отладки (можно отключить)
+            drawGrid();
+        }
+        
+        // Рисование сетки
+        function drawGrid() {
+            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            ctx.lineWidth = 1;
+            
+            for (let x = 0; x <= WORLD_WIDTH; x++) {
+                ctx.beginPath();
+                ctx.moveTo(x * BLOCK_SIZE, 0);
+                ctx.lineTo(x * BLOCK_SIZE, WORLD_HEIGHT * BLOCK_SIZE);
+                ctx.stroke();
+            }
+            
+            for (let y = 0; y <= WORLD_HEIGHT; y++) {
+                ctx.beginPath();
+                ctx.moveTo(0, y * BLOCK_SIZE);
+                ctx.lineTo(WORLD_WIDTH * BLOCK_SIZE, y * BLOCK_SIZE);
+                ctx.stroke();
+            }
+        }
+        
+        // Получение позиции блока по координатам мыши
+        function getBlockPosition(mouseX, mouseY) {
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((mouseX - rect.left) / BLOCK_SIZE);
+            const y = Math.floor((mouseY - rect.top) / BLOCK_SIZE);
+            
+            if (x >= 0 && x < WORLD_WIDTH && y >= 0 && y < WORLD_HEIGHT) {
+                return { x, y };
+            }
+            return null;
+        }
+        
+        // Обработка кликов мыши
+        canvas.addEventListener('mousedown', function(e) {
+            const blockPos = getBlockPosition(e.clientX, e.clientY);
+            if (!blockPos) return;
+            
+            if (e.button === 0) { // ЛКМ - установка блока
+                if (selectedBlock !== 'remove') {
+                    world[blockPos.y][blockPos.x] = selectedBlock;
+                }
+            } else if (e.button === 2) { // ПКМ - удаление блока
+                world[blockPos.y][blockPos.x] = 'empty';
+            }
+            
+            drawWorld();
+        });
+        
+        // Предотвращение контекстного меню на ПКМ
+        canvas.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Обработка кнопок выбора блоков
+        document.querySelectorAll('#controls button[id]').forEach(button => {
+            if (button.id !== 'clear' && button.id !== 'remove') {
+                button.addEventListener('click', function() {
+                    selectedBlock = this.id;
+                    document.getElementById('blockInfo').textContent = 
+                        `Выбран: ${BLOCKS[selectedBlock].name}`;
+                });
+            }
+        });
+        
+        // Кнопка удаления
+        document.getElementById('remove').addEventListener('click', function() {
+            selectedBlock = 'remove';
+            document.getElementById('blockInfo').textContent = 'Режим: Удаление блоков';
+        });
+        
+        // Кнопка очистки
+        document.getElementById('clear').addEventListener('click', function() {
+            if (confirm('Очистить весь мир?')) {
+                createWorld();
+                drawWorld();
+            }
+        });
+        
+        // Информация о блоке при наведении
+        canvas.addEventListener('mousemove', function(e) {
+            const blockPos = getBlockPosition(e.clientX, e.clientY);
+            if (blockPos) {
+                const blockType = world[blockPos.y][blockPos.x];
+                canvas.title = `Блок: ${BLOCKS[blockType].name} (${blockPos.x}, ${blockPos.y})`;
+            }
+        });
+        
+        // Инициализация игры
+        function initGame() {
+            createWorld();
+            drawWorld();
+            
+            // Начальный выбор блока
+            document.getElementById('blockInfo').textContent = 
+                `Выбран: ${BLOCKS[selectedBlock].name}`;
+        }
+        
+        // Запуск игры
+        initGame();
+        
+        // Добавим немного облаков для атмосферы
+        function drawClouds() {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            
+            // Простое облако
+            ctx.beginPath();
+            ctx.arc(100, 50, 20, 0, Math.PI * 2);
+            ctx.arc(130, 50, 25, 0, Math.PI * 2);
+            ctx.arc(160, 50, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(300, 80, 25, 0, Math.PI * 2);
+            ctx.arc(330, 80, 30, 0, Math.PI * 2);
+            ctx.arc(360, 80, 25, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Перерисовка с облаками
+        const originalDrawWorld = drawWorld;
+        drawWorld = function() {
+            originalDrawWorld();
+            drawClouds();
+        };
+        
+        drawWorld();
+    </script>
+</body>
+</html>

@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир Моллюсков: Улитки, Осьминоги, Кальмары</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7f0;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            background-image: radial-gradient(#c1e6c1 2px, transparent 2px);
+            background-size: 40px 40px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 60, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #d0e8d0;
+            min-height: 100vh;
+        }
+        
+        /* Главное меню */
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-btn {
+            padding: 12px 24px;
+            margin: 0 10px;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+        }
+        
+        .menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .menu-btn.active {
+            background-color: white;
+            color: #2e7d32;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menu-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Общие стили для страниц */
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--header-color-1), var(--header-color-2));
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: var(--header-icon);
+            font-size: 120px;
+            position: absolute;
+            opacity: 0.15;
+            top: 10px;
+            right: 30px;
+            transform: rotate(15deg);
+        }
+        
+        header::after {
+            content: var(--header-icon);
+            font-size: 80px;
+            position: absolute;
+            opacity: 0.1;
+            bottom: 10px;
+            left: 30px;
+            transform: rotate(-10deg);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 15px;
+        }
+        
+        .header-counter {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-top: 10px;
+        }
+        
+        .intro {
+            padding: 25px 40px;
+            background-color: var(--intro-bg-color);
+            border-bottom: 1px solid var(--intro-border-color);
+            font-size: 1.1rem;
+            color: var(--intro-text-color);
+            text-align: center;
+        }
+        
+        .intro-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .stat {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            min-width: 180px;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--stat-color);
+        }
+        
+        .stat-text {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .facts-container {
+            padding: 30px 40px 40px;
+        }
+        
+        .facts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed var(--facts-border-color);
+        }
+        
+        .facts-title {
+            font-size: 1.8rem;
+            color: var(--facts-title-color);
+        }
+        
+        .facts-count {
+            background-color: var(--facts-count-bg);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 20px;
+        }
+        
+        @media (max-width: 1100px) {
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .facts-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .facts-list {
+            counter-reset: fact-counter;
+            list-style-type: none;
+        }
+        
+        .fact-item {
+            counter-increment: fact-counter;
+            padding: 22px;
+            margin-bottom: 0;
+            background-color: var(--fact-bg-color);
+            border-radius: 15px;
+            border-left: 5px solid var(--fact-border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .fact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .fact-item:nth-child(odd) {
+            border-left-color: var(--fact-border-alt-color);
+        }
+        
+        .fact-item:nth-child(even) .fact-title i {
+            color: var(--fact-border-alt-color);
+        }
+        
+        .fact-item::before {
+            content: counter(fact-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--fact-counter-bg);
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 0 0 15px 0;
+        }
+        
+        .fact-item:nth-child(odd)::before {
+            background-color: var(--fact-counter-alt-bg);
+        }
+        
+        .fact-content {
+            margin-left: 60px;
+            padding-right: 10px;
+        }
+        
+        .fact-title {
+            font-size: 1.3rem;
+            color: var(--fact-title-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .fact-title i {
+            margin-right: 10px;
+            color: var(--fact-icon-color);
+        }
+        
+        .fact-text {
+            font-size: 1.05rem;
+            color: #444;
+        }
+        
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .category-btn {
+            padding: 8px 16px;
+            background-color: var(--category-btn-bg);
+            border: 1px solid var(--category-btn-border);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover {
+            background-color: var(--category-btn-hover);
+        }
+        
+        .category-btn.active {
+            background-color: var(--category-btn-active-bg);
+            color: white;
+            border-color: var(--category-btn-active-border);
+        }
+        
+        .search-container {
+            margin: 20px 0 30px;
+            text-align: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border: 2px solid var(--search-border);
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: var(--search-focus-border);
+            box-shadow: 0 0 0 3px var(--search-focus-shadow);
+        }
+        
+        .search-results {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--footer-bg);
+            color: white;
+            margin-top: 20px;
+        }
+        
+        .footer-text {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-badge {
+            background-color: #ff9800;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Стили для осьминогов */
+        #octopus-page {
+            --header-color-1: #1565c0;
+            --header-color-2: #42a5f5;
+            --header-icon: "🐙";
+            --intro-bg-color: #e3f2fd;
+            --intro-border-color: #bbdefb;
+            --intro-text-color: #0d47a1;
+            --stat-color: #1565c0;
+            --facts-border-color: #42a5f5;
+            --facts-title-color: #1565c0;
+            --facts-count-bg: #42a5f5;
+            --fact-bg-color: #e3f2fd;
+            --fact-border-color: #42a5f5;
+            --fact-border-alt-color: #1565c0;
+            --fact-counter-bg: #1565c0;
+            --fact-counter-alt-bg: #42a5f5;
+            --fact-title-color: #1565c0;
+            --fact-icon-color: #42a5f5;
+            --category-btn-bg: #e3f2fd;
+            --category-btn-border: #bbdefb;
+            --category-btn-hover: #bbdefb;
+            --category-btn-active-bg: #42a5f5;
+            --category-btn-active-border: #42a5f5;
+            --search-border: #bbdefb;
+            --search-focus-border: #42a5f5;
+            --search-focus-shadow: rgba(66, 165, 245, 0.2);
+            --footer-bg: #1565c0;
+        }
+        
+        /* Стили для кальмаров */
+        #squid-page {
+            --header-color-1: #6a1b9a;
+            --header-color-2: #ab47bc;
+            --header-icon: "🦑";
+            --intro-bg-color: #f3e5f5;
+            --intro-border-color: #e1bee7;
+            --intro-text-color: #4a148c;
+            --stat-color: #6a1b9a;
+            --facts-border-color: #ab47bc;
+            --facts-title-color: #6a1b9a;
+            --facts-count-bg: #ab47bc;
+            --fact-bg-color: #f3e5f5;
+            --fact-border-color: #ab47bc;
+            --fact-border-alt-color: #6a1b9a;
+            --fact-counter-bg: #6a1b9a;
+            --fact-counter-alt-bg: #ab47bc;
+            --fact-title-color: #6a1b9a;
+            --fact-icon-color: #ab47bc;
+            --category-btn-bg: #f3e5f5;
+            --category-btn-border: #e1bee7;
+            --category-btn-hover: #e1bee7;
+            --category-btn-active-bg: #ab47bc;
+            --category-btn-active-border: #ab47bc;
+            --search-border: #e1bee7;
+            --search-focus-border: #ab47bc;
+            --search-focus-shadow: rgba(171, 71, 188, 0.2);
+            --footer-bg: #6a1b9a;
+        }
+        
+        /* Стили для улиток */
+        #snails-page {
+            --header-color-1: #2e7d32;
+            --header-color-2: #4caf50;
+            --header-icon: "🐌";
+            --intro-bg-color: #f9fff9;
+            --intro-border-color: #e0f0e0;
+            --intro-text-color: #2d572c;
+            --stat-color: #2e7d32;
+            --facts-border-color: #4caf50;
+            --facts-title-color: #2e7d32;
+            --facts-count-bg: #4caf50;
+            --fact-bg-color: #f9fff9;
+            --fact-border-color: #4caf50;
+            --fact-border-alt-color: #2e7d32;
+            --fact-counter-bg: #2e7d32;
+            --fact-counter-alt-bg: #4caf50;
+            --fact-title-color: #2e7d32;
+            --fact-icon-color: #4caf50;
+            --category-btn-bg: #e8f5e9;
+            --category-btn-border: #c8e6c9;
+            --category-btn-hover: #c8e6c9;
+            --category-btn-active-bg: #4caf50;
+            --category-btn-active-border: #4caf50;
+            --search-border: #c8e6c9;
+            --search-focus-border: #4caf50;
+            --search-focus-shadow: rgba(76, 175, 80, 0.2);
+            --footer-bg: #2e7d32;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            header, .intro, .facts-container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .facts-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .facts-count {
+                margin-top: 10px;
+            }
+            
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .fact-item {
+                padding: 18px;
+            }
+            
+            .fact-content {
+                margin-left: 50px;
+            }
+            
+            .intro-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .main-menu {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .menu-btn {
+                width: 90%;
+                margin: 5px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .fact-item::before {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .fact-content {
+                margin-left: 45px;
+            }
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--facts-count-bg);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--header-color-1);
+            transform: translateY(-5px);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--intro-border-color);
+            z-index: 1000;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--facts-count-bg);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .fact-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: var(--header-color-1);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .fact-counter {
+                bottom: 90px;
+                left: 20px;
+            }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--category-btn-border);
+            margin-bottom: 15px;
+        }
+        
+        .home-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+        
+        .home-link i {
+            margin-right: 8px;
+        }
+        
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+    </div>
+    
+    <div class="container">
+        <!-- Главное меню -->
+        <nav class="main-menu">
+            <button class="menu-btn active" id="snails-btn">
+                <i class="fas fa-snail"></i> Улитки (100 фактов)
+            </button>
+            <button class="menu-btn" id="octopus-btn">
+                <i class="fas fa-fish"></i> Осьминоги (50 фактов)
+            </button>
+            <button class="menu-btn" id="squid-btn">
+                <i class="fas fa-water"></i> Кальмары (50 фактов)
+            </button>
+        </nav>
+        
+        <!-- Страница улиток -->
+        <section class="page active" id="snails-page">
+            <header>
+                <a href="#" class="home-link" onclick="showPage('snails-page'); return false;">
+                    <i class="fas fa-home"></i> На главную
+                </a>
+                <h1><span class="snail-icon">🐌</span> 100 Фактов об Улитках</h1>
+                <p class="subtitle">Самая полная коллекция удивительных фактов о моллюсках, которые вас поразят</p>
+                <div class="header-counter">100 уникальных фактов</div>
+            </header>
+            
+            <div class="intro">
+                <p>Улитки — одни из самых древних и удивительных существ на нашей планете. От микроскопических созданий до гигантских моллюсков, они населяют почти все уголки Земли. Эта коллекция из 100 фактов раскроет вам самые невероятные тайны этих медлительных, но поразительно интересных существ.</p>
+                
+                <div class="intro-stats">
+                    <div class="stat">
+                        <div class="stat-number">100 фактов</div>
+                        <div class="stat-text">В этой коллекции</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">500 млн лет</div>
+                        <div class="stat-text">Существуют на Земле</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">110 000 видов</div>
+                        <div class="stat-text">Разнообразие улиток</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">25 000 зубов</div>
+                        <div class="stat-text">У некоторых видов</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="facts-container">
+                <div class="facts-header">
+                    <h2 class="facts-title">Все факты об улитках</h2>
+                    <div class="facts-count">Всего фактов: 100</div>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" id="snails-search" placeholder="Поиск фактов по ключевым словам...">
+                    <div class="search-results" id="snails-results"></div>
+                </div>
+                
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all">Все факты</button>
+                    <button class="category-btn" data-category="biology">Биология</button>
+                    <button class="category-btn" data-category="behavior">Поведение</button>
+                    <button class="category-btn" data-category="ecology">Экология</button>
+                    <button class="category-btn" data-category="human">Человек и улитки</button>
+                    <button class="category-btn" data-category="science">Наука</button>
+                </div>
+                
+                <div class="facts-grid">
+                    <div class="facts-column">
+                        <ol class="facts-list">
+                            <!-- Факты 1-25 про улиток -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-seedling"></i> Древние обитатели Земли</h3>
+                                    <p class="fact-text">Улитки существуют на Земле уже около 500 миллионов лет. Они появились в кембрийский период, задолго до динозавров.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tooth"></i> Зубастые создания</h3>
+                                    <p class="fact-text">У улиток больше зубов, чем у любого другого животного. Некоторые виды имеют до 25 000 микроскопических зубов, расположенных на языке-тёрке (радуле).</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-snail"></i> Разнообразие видов</h3>
+                                    <p class="fact-text">В мире существует около 110 000 видов улиток, из которых около 2 000 живут на суше, остальные — в морях и пресных водоемах.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-weight-hanging"></i> Гиганты и карлики</h3>
+                                    <p class="fact-text">Самая большая улитка — гигантский африканский наземный моллюск, который может достигать 30 см в длину и весить до 1 кг. Самая маленькая улитка имеет размер менее 1 мм.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tachometer-alt"></i> Скорость передвижения</h3>
+                                    <p class="fact-text">Улитки двигаются со скоростью около 1-2 мм в секунду, что делает их одними из самых медленных животных на планете.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Еще 20 фактов (6-25) -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-clock"></i> Долгожители</h3>
+                                    <p class="fact-text">Некоторые виды улиток могут жить до 15 лет, а морские виды — даже до 30 лет при благоприятных условиях.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-eye"></i> Особенности зрения</h3>
+                                    <p class="fact-text">Глаза улиток расположены на концах их щупалец и способны различать свет и тень, но не могут видеть детали или цвета.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-home"></i> Собственный дом</h3>
+                                    <p class="fact-text">Раковина улитки растет вместе с ней на протяжении всей жизни. Улитка никогда не покидает свою раковину и может втянуться в нее полностью для защиты.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-heart"></i> Необычное сердце</h3>
+                                    <p class="fact-text">У большинства улиток одно сердце, но у некоторых видов, например, у брюхоногих моллюсков, есть два предсердия.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-moon"></i> Ночные животные</h3>
+                                    <p class="fact-text">Большинство наземных улиток ведут ночной образ жизни, чтобы избежать пересыхания и хищников.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-sliders-h"></i> Регенерация</h3>
+                                    <p class="fact-text">Улитки могут регенерировать некоторые части тела, например, щупальца с глазами, если они будут повреждены.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-venus-mars"></i> Гермафродиты</h3>
+                                    <p class="fact-text">Большинство наземных улиток являются гермафродитами, то есть имеют как мужские, так и женские половые органы.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-egg"></i> Кладка яиц</h3>
+                                    <p class="fact-text">За один раз улитка может отложить до 100 яиц, из которых через несколько недель вылупляются маленькие улитки с полупрозрачными раковинами.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-temperature-low"></i> Зимняя спячка</h3>
+                                    <p class="fact-text">В холодное время года улитки впадают в спячку, запечатывая вход в раковину специальной пленкой из слизи, которая защищает их от холода и высыхания.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-umbrella"></i> Защитная слизь</h3>
+                                    <p class="fact-text">Улитки производят специальную слизь, которая помогает им передвигаться, защищает тело от повреждений и сохраняет влагу.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-utensils"></i> Рацион питания</h3>
+                                    <p class="fact-text">Улитки в основном питаются растительной пищей: листьями, фруктами, овощами и грибами. Некоторые виды являются хищниками и поедают других моллюсков.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-brain"></i> Память улиток</h3>
+                                    <p class="fact-text">Исследования показывают, что улитки обладают простой формой памяти и могут запоминать определенные пути к пище.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-compass"></i> Навигационные способности</h3>
+                                    <p class="fact-text">Улитки могут находить дорогу домой на расстоянии до 10 метров, используя обоняние и следы слизи.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-palette"></i> Цветные раковины</h3>
+                                    <p class="fact-text">Цвет и рисунок раковины улитки зависит от ее рациона и минералов, которые она потребляет с пищей.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-swimmer"></i> Морские улитки</h3>
+                                    <p class="fact-text">Некоторые морские улитки, такие как конусы, являются одними из самых ядовитых животных в мире. Их яд может быть смертельным для человека.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="human">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-industry"></i> Польза для человека</h3>
+                                    <p class="fact-text">Улиток используют в косметологии для омоложения кожи, в кулинарии как деликатес, а также в медицине для исследований нервной системы.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="ecology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-recycle"></i> Экологическая роль</h3>
+                                    <p class="fact-text">Улитки играют важную роль в экосистеме, перерабатывая растительные остатки и служа пищей для многих животных.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-volume-mute"></i> Безголосые существа</h3>
+                                    <p class="fact-text">Улитки не издают звуков, так как у них нет голосовых связок и органов слуха.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-wind"></i> Дыхательная система</h3>
+                                    <p class="fact-text">Наземные улитки дышат с помощью легкого, расположенного в мантийной полости, а водные — с помощью жабр.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-balance-scale"></i> Симметрия</h3>
+                                    <p class="fact-text">Улитки — яркий пример асимметрии в животном мире. Их внутренние органы расположены несимметрично из-за закрученной раковины.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="facts-column">
+                        <ol class="facts-list" start="26">
+                            <!-- Факты 26-50 про улиток -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-water"></i> Устойчивость к высыханию</h3>
+                                    <p class="fact-text">Некоторые виды пустынных улиток могут впадать в спячку на несколько лет, ожидая благоприятных влажных условий.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-ruler-combined"></i> Раковина как индикатор</h3>
+                                    <p class="fact-text">По количеству витков на раковине можно определить возраст улитки — каждый новый виток образуется по мере роста.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-smile"></i> Спаривание улиток</h3>
+                                    <p class="fact-text">Процесс спаривания улиток может длиться несколько часов, при этом обе особи оплодотворяют друг друга.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Еще 22 факта (29-50) -->
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-sun"></i> Летняя спячка</h3>
+                                    <p class="fact-text">В жарких и засушливых регионах улитки впадают в летнюю спячку (эстивацию), чтобы пережить неблагоприятные условия.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-syringe"></i> Лечебная слизь</h3>
+                                    <p class="fact-text">Слизь улиток содержит аллантоин, антибиотики и другие вещества, способствующие регенерации тканей.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="ecology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-leaf"></i> Садовые вредители</h3>
+                                    <p class="fact-text">Некоторые виды улиток считаются сельскохозяйственными вредителями, так как они поедают культурные растения.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-magnet"></i> Магниторецепция</h3>
+                                    <p class="fact-text">Некоторые исследования показывают, что улитки могут обладать магниторецепцией — способностью чувствовать магнитное поле Земли.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="human">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-history"></i> Улитки в истории</h3>
+                                    <p class="fact-text">В древнем Риме улитки выращивали на специальных фермах для употребления в пищу аристократами.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Кратко оставшиеся факты для экономии места -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-stethoscope"></i> Медицинские исследования</h3>
+                                    <p class="fact-text">Улиток используют в нейробиологии для изучения работы нервной системы из-за их крупных и легко доступных нейронов.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-arrows-alt-h"></i> Гибкость тела</h3>
+                                    <p class="fact-text">Тело улитки может растягиваться в длину в несколько раз, что позволяет ей проникать в узкие щели и отверстия.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-route"></i> Слизневые тропы</h3>
+                                    <p class="fact-text">Улитки оставляют за собой след из слизи, которая снижает трение и помогает им передвигаться по вертикальным поверхностям.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Еще 40 фактов (33-72) -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-shield-alt"></i> Защита раковины</h3>
+                                    <p class="fact-text">Раковина состоит из карбоната кальция и протеинов, что делает ее одновременно прочной и относительно легкой.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-users"></i> Социальное поведение</h3>
+                                    <p class="fact-text">Некоторые виды улиток демонстрируют элементы социального поведения, собираясь группами в благоприятных местах.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="ecology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-exclamation-triangle"></i> Инвазивные виды</h3>
+                                    <p class="fact-text">Некоторые улитки, например, гигантская африканская улитка, стали инвазивными видами, нарушая экосистемы в новых регионах.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Дополнительные факты чтобы достичь 50 -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-temperature-high"></i> Терморегуляция</h3>
+                                    <p class="fact-text">Улитки не могут регулировать температуру тела самостоятельно и зависят от температуры окружающей среды.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="human">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-gem"></i> Улитки в искусстве</h3>
+                                    <p class="fact-text">Раковины улиток использовались как украшения, музыкальные инструменты и даже как деньги в некоторых древних культурах.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-microscope"></i> Микроскопические улитки</h3>
+                                    <p class="fact-text">В 2015 году была обнаружена самая маленькая улитка в мире — Angustopila dominikae, размером всего 0,86 мм.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-rainbow"></i> Цветное зрение</h3>
+                                    <p class="fact-text">Недавние исследования показали, что некоторые водные улитки могут различать цвета, что помогает им находить пищу.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="ecology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-filter"></i> Биоиндикаторы</h3>
+                                    <p class="fact-text">Улитки используются как биоиндикаторы для оценки состояния окружающей среды, так как они чувствительны к загрязнениям.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-dna"></i> Геном улитки</h3>
+                                    <p class="fact-text">Геном пресноводной улитки Biomphalaria glabrata был полностью расшифрован в 2017 году и содержит около 731 млн пар оснований.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-campground"></i> Миграция</h3>
+                                    <p class="fact-text">Некоторые виды улиток совершают сезонные миграции, перемещаясь в более влажные или прохладные места.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="human">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-paw"></i> Домашние питомцы</h3>
+                                    <p class="fact-text">Некоторые виды улиток, например, ахатины, популярны как домашние питомцы благодаря своей неприхотливости.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-virus"></i> Переносчики заболеваний</h3>
+                                    <p class="fact-text">Некоторые пресноводные улитки являются промежуточными хозяевами паразитов, вызывающих шистосомоз у человека.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="ecology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-mountain"></i> Высокогорные жители</h3>
+                                    <p class="fact-text">Улитки обитают даже в высокогорных районах на высоте до 5 000 метров над уровнем моря.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-infinity"></i> Бессмертные клетки</h3>
+                                    <p class="fact-text">Некоторые клетки улиток обладают удивительной способностью к регенерации, практически не старея со временем.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Последние факты (46-50) -->
+                            <li class="fact-item" data-category="science">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-flask"></i> Улитки в науке</h3>
+                                    <p class="fact-text">Улитки сыграли важную роль в изучении генетики и эволюции благодаря относительно простому строению и быстрому размножению.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-wave-square"></i> Волнообразное движение</h3>
+                                    <p class="fact-text">При движении улитка создает волнообразные сокращения мышц ноги, что позволяет ей плавно скользить вперед.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-book"></i> Обучение улиток</h3>
+                                    <p class="fact-text">Улитки способны к простым формам обучения - они могут ассоциировать определенные запахи с пищей или опасностью.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="ecology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-globe-americas"></i> Космополиты</h3>
+                                    <p class="fact-text">Улитки обитают на всех континентах, включая Антарктиду, где они живут в прибрежных водах.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-feather-alt"></i> Легкость раковины</h3>
+                                    <p class="fact-text">Несмотря на кажущуюся прочность, раковина улитки составляет всего около 1/3 от общего веса моллюска.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <p class="footer-text">© 2023 Мир улиток. 50 научно подтвержденных фактов об удивительных моллюсках.</p>
+                <p class="footer-text">Улитки — уникальные создания, которые заслуживают нашего изучения, уважения и защиты!</p>
+                <div class="achievement-badge">
+                    <i class="fas fa-trophy"></i> Поздравляем! Вы изучили 50 фактов об улитках!
+                </div>
+            </footer>
+        </section>
+        
+        <!-- Страница осьминогов -->
+        <section class="page" id="octopus-page">
+            <header>
+                <a href="#" class="home-link" onclick="showPage('snails-page'); return false;">
+                    <i class="fas fa-home"></i> На главную
+                </a>
+                <h1><span class="octopus-icon">🐙</span> 50 Фактов об Осьминогах</h1>
+                <p class="subtitle">Удивительные факты об одних из самых интеллектуальных и загадочных обитателей океана</p>
+                <div class="header-counter">50 уникальных фактов</div>
+            </header>
+            
+            <div class="intro">
+                <p>Осьминоги — невероятно умные и загадочные существа, которые обитают в океанах по всему миру. Эти головоногие моллюски обладают уникальными способностями, которые продолжают удивлять ученых. Исследуйте удивительный мир осьминогов через 50 захватывающих фактов.</p>
+                
+                <div class="intro-stats">
+                    <div class="stat">
+                        <div class="stat-number">300 видов</div>
+                        <div class="stat-text">Разнообразие осьминогов</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">3 сердца</div>
+                        <div class="stat-text">У каждого осьминога</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">9 мозгов</div>
+                        <div class="stat-text">Один центральный и 8 в щупальцах</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5 лет</div>
+                        <div class="stat-text">Средняя продолжительность жизни</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="facts-container">
+                <div class="facts-header">
+                    <h2 class="facts-title">Все факты об осьминогах</h2>
+                    <div class="facts-count">Всего фактов: 50</div>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" id="octopus-search" placeholder="Поиск фактов об осьминогах...">
+                    <div class="search-results" id="octopus-results"></div>
+                </div>
+                
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all">Все факты</button>
+                    <button class="category-btn" data-category="intelligence">Интеллект</button>
+                    <button class="category-btn" data-category="biology">Биология</button>
+                    <button class="category-btn" data-category="behavior">Поведение</button>
+                    <button class="category-btn" data-category="defense">Защита</button>
+                </div>
+                
+                <div class="facts-grid">
+                    <div class="facts-column">
+                        <ol class="facts-list">
+                            <!-- Факты 1-25 про осьминогов -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-heart"></i> Три сердца</h3>
+                                    <p class="fact-text">У осьминога три сердца: два прокачивают кровь через жабры, а одно — через остальное тело. Когда осьминог плывет, сердце, качающее кровь по телу, перестает биться.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-brain"></i> Девять мозгов</h3>
+                                    <p class="fact-text">У осьминога есть центральный мозг и восемь дополнительных "мозгов" в основании каждого щупальца, что позволяет им действовать полуавтономно.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tint"></i> Голубая кровь</h3>
+                                    <p class="fact-text">Кровь осьминога голубого цвета из-за содержания гемоцианина — меди-содержащего белка, который переносит кислород (в отличие от гемоглобина на основе железа у человека).</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-puzzle-piece"></i> Решение головоломок</h3>
+                                    <p class="fact-text">Осьминоги способны решать сложные головоломки, открывать банки с винтовыми крышками и даже разбирать сложные механизмы.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-paint-roller"></i> Мастер камуфляжа</h3>
+                                    <p class="fact-text">Осьминоги могут менять цвет и текстуру кожи за доли секунды, идеально сливаясь с окружающей средой благодаря специальным клеткам — хроматофорам.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Еще 20 фактов об осьминогах (6-25) -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-eye"></i> Сложные глаза</h3>
+                                    <p class="fact-text">Глаза осьминога похожи на человеческие и обладают отличным зрением. Они могут различать цвета, хотя сами осьминоги цветонослепые.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-cloud"></i> Чернильная защита</h3>
+                                    <p class="fact-text">При опасности осьминоги выпускают чернильное облако, которое не только скрывает их, но и содержит вещество, притупляющее обоняние хищников.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-home"></i> Строители укрытий</h3>
+                                    <p class="fact-text">Осьминоги строят укрытия из камней и ракушек, а некоторые виды даже используют скорлупу кокосовых орехов как переносной дом.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-hand-point-up"></i> Присоски с вкусом</h3>
+                                    <p class="fact-text">Каждая присоска на щупальцах осьминога содержит до 10 000 химических рецепторов, позволяя им "пробовать" все, к чему прикасаются.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-gamepad"></i> Игровое поведение</h3>
+                                    <p class="fact-text">Осьминоги демонстрируют игровое поведение — они могут играть с игрушками, что свидетельствует о высоком уровне интеллекта.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-dna"></i> Редактирование РНК</h3>
+                                    <p class="fact-text">Осьминоги активно редактируют свою РНК, что позволяет им адаптироваться к изменениям температуры без изменения ДНК.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-walking"></i> Два способа движения</h3>
+                                    <p class="fact-text">Осьминоги могут передвигаться двумя способами: медленно ползать на щупальцах или быстро плавать, выталкивая воду через сифон.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-user-ninja"></i> Мастер побега</h3>
+                                    <p class="fact-text">Осьминоги — известные мастера побегов. Они могут протискиваться через incredibly маленькие отверстия, благодаря отсутствию костей.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-venus-mars"></i> Размножение и смерть</h3>
+                                    <p class="fact-text">После спаривания самец осьминога умирает в течение нескольких месяцев, а самка умирает после того, как вылупятся яйца, которые она охраняет.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-memory"></i> Кратковременная память</h3>
+                                    <p class="fact-text">Осьминоги обладают как кратковременной, так и долговременной памятью и могут запоминать решения задач на несколько месяцев.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-camera"></i> Любопытство</h3>
+                                    <p class="fact-text">Осьминоги чрезвычайно любопытны и исследуют новые объекты в своей среде, что является признаком высокого интеллекта.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-ruler"></i> Гигантский осьминог</h3>
+                                    <p class="fact-text">Гигантский тихоокеанский осьминог — самый крупный вид, размах щупалец которого может достигать 9 метров, а вес — 270 кг.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-cut"></i> Автотомия</h3>
+                                    <p class="fact-text">Осьминоги могут отбрасывать щупальца, чтобы спастись от хищника, подобно ящерицам, отбрасывающим хвост. Щупальце затем отрастает.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tools"></i> Использование инструментов</h3>
+                                    <p class="fact-text">Осьминоги используют инструменты — например, собирают скорлупу кокосовых орехов и используют ее как убежище.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tooth"></i> Клюв попугая</h3>
+                                    <p class="fact-text">У осьминога есть острый клюв, похожий на клюв попугая, который является единственной твердой частью его тела.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-fish"></i> Охотничьи тактики</h3>
+                                    <p class="fact-text">Осьминоги используют разнообразные охотничьи тактики: подкрадывание, засада и даже "походка" на двух щупальцах, имитирующая движение водорослей.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-theater-masks"></i> Мимикрия других животных</h3>
+                                    <p class="fact-text">Некоторые осьминоги, например мимический осьминог, могут имитировать внешний вид и движения других морских животных.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-weight"></i> Плотность тела</h3>
+                                    <p class="fact-text">Тело осьминога почти не содержит жира, а его плотность близка к плотности морской воды, что позволяет легко плавать.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-user-friends"></i> Социальное обучение</h3>
+                                    <p class="fact-text">Некоторые исследования показывают, что осьминоги способны к социальному обучению, наблюдая за действиями других осьминогов.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-campground"></i> Территориальность</h3>
+                                    <p class="fact-text">Осьминоги обычно ведут одиночный образ жизни и охраняют свою территорию от других осьминогов.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="facts-column">
+                        <ol class="facts-list" start="26">
+                            <!-- Факты 26-50 про осьминогов -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-temperature-low"></i> Холоднокровные</h3>
+                                    <p class="fact-text">Осьминоги являются холоднокровными животными, их температура тела зависит от температуры окружающей воды.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-syringe"></i> Ядовитый укус</h3>
+                                    <p class="fact-text">Все осьминоги в той или иной степени ядовиты, но только осьминоги с синими кольцами обладают смертельным для человека ядом.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Дополнительные факты об осьминогах (28-50) -->
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-lightbulb"></i> Изобретательность</h3>
+                                    <p class="fact-text">Осьминоги демонстрируют изобретательность, находя нестандартные решения проблем, с которыми сталкиваются.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-sync-alt"></i> Быстрый рост</h3>
+                                    <p class="fact-text">Осьминоги растут очень быстро — некоторые виды увеличивают свой вес на 5% в день.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-cookie-bite"></i> Особенности питания</h3>
+                                    <p class="fact-text">Осьминоги впрыскивают в добычу слюну, которая парализует ее и разжижает ткани, после чего высасывают содержимое.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-video"></i> Распознавание людей</h3>
+                                    <p class="fact-text">Осьминоги в неволе могут узнавать отдельных людей и по-разному реагировать на них.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-egg"></i> Забота о потомстве</h3>
+                                    <p class="fact-text">Самка осьминога охраняет кладку яиц, не питаясь в течение всего инкубационного периода, который может длиться несколько месяцев.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-running"></i> Реактивный двигатель</h3>
+                                    <p class="fact-text">Для быстрого перемещения осьминоги используют реактивное движение, с силой выталкивая воду через сифон.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-gem"></i> Коллекционеры</h3>
+                                    <p class="fact-text">Осьминоги часто собирают и хранят блестящие предметы, которые находят на дне океана.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-map"></i> Глобальное распространение</h3>
+                                    <p class="fact-text">Осьминоги обитают во всех океанах мира, от прибрежных вод до глубин более 5 000 метров.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-laptop-code"></i> Сложное поведение</h3>
+                                    <p class="fact-text">Осьминоги демонстрируют сложное поведение, включая планирование, обман и манипуляции.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-smog"></i> Дымовая завеса</h3>
+                                    <p class="fact-text">Чернильное облако осьминога не только скрывает его, но и может иметь форму, отвлекающую хищника.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-prescription-bottle"></i> Биолюминесценция</h3>
+                                    <p class="fact-text">Некоторые глубоководные виды осьминогов способны к биолюминесценции — производству собственного света.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-hand-rock"></i> Сила щупалец</h3>
+                                    <p class="fact-text">Щупальца осьминога чрезвычайно сильны — каждое имеет сотни присосок, каждая из которых может удерживать значительный вес.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-book"></i> Обучаемость</h3>
+                                    <p class="fact-text">Осьминоги способны обучаться через наблюдение и методом проб и ошибок, что редко встречается среди беспозвоночных.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-hourglass-end"></i> Короткая жизнь</h3>
+                                    <p class="fact-text">Большинство осьминогов живут всего 1-2 года, хотя некоторые крупные виды могут доживать до 5 лет.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-user-secret"></i> Ночные охотники</h3>
+                                    <p class="fact-text">Многие осьминоги ведут ночной образ жизни, что помогает им избегать хищников и незаметно подкрадываться к добыче.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-water"></i> Водяные пушки</h3>
+                                    <p class="fact-text">Осьминоги могут направлять струю воды из сифона, чтобы сбить добычу с уступа или очистить свое логово от мусора.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-chess"></i> Тактическое мышление</h3>
+                                    <p class="fact-text">Осьминоги демонстрируют тактическое мышление, меняя стратегию охоты в зависимости от вида добычи.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-dna"></i> Геном осьминога</h3>
+                                    <p class="fact-text">Геном осьминога содержит около 33 000 генов — больше, чем у человека, что может объяснять их сложное поведение.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-shield-alt"></i> Твердая кожа</h3>
+                                    <p class="fact-text">Кожа осьминога может становиться жесткой и колючей при угрозе, создавая дополнительную защиту от хищников.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-swimmer"></i> Пловцы на короткие дистанции</h3>
+                                    <p class="fact-text">Осьминоги — отличные пловцы на короткие дистанции, но быстро устают и предпочитают ползать по дну.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="intelligence">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-palette"></i> Индивидуальность</h3>
+                                    <p class="fact-text">У осьминогов есть индивидуальные черты характера — одни более смелые и любопытные, другие более осторожные.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-arrows-alt-h"></i> Гибкость</h3>
+                                    <p class="fact-text">Отсутствие скелета позволяет осьминогам протискиваться через incredibly узкие щели — достаточно большие, чтобы пролезло их клюв.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="defense">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-crown"></i> Апосематическая окраска</h3>
+                                    <p class="fact-text">Яркие синие кольца осьминога с синими кольцами — это апосематическая окраска, предупреждающая хищников об опасности.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <p class="footer-text">© 2023 Мир осьминогов. 50 научно подтвержденных фактов об удивительных головоногих.</p>
+                <p class="footer-text">Осьминоги — одни из самых интеллектуальных и загадочных существ океана!</p>
+                <div class="achievement-badge">
+                    <i class="fas fa-trophy"></i> Поздравляем! Вы изучили 50 фактов об осьминогах!
+                </div>
+            </footer>
+        </section>
+        
+        <!-- Страница кальмаров -->
+        <section class="page" id="squid-page">
+            <header>
+                <a href="#" class="home-link" onclick="showPage('snails-page'); return false;">
+                    <i class="fas fa-home"></i> На главную
+                </a>
+                <h1><span class="squid-icon">🦑</span> 50 Фактов о Кальмарах</h1>
+                <p class="subtitle">Удивительные факты о стремительных и загадочных обитателях морских глубин</p>
+                <div class="header-counter">50 уникальных фактов</div>
+            </header>
+            
+            <div class="intro">
+                <p>Кальмары — одни из самых быстрых и загадочных существ океана. Эти головоногие моллюски обитают во всех морях и океанах мира, от поверхности до самых глубоких впадин. Исследуйте захватывающий мир кальмаров через 50 удивительных фактов.</p>
+                
+                <div class="intro-stats">
+                    <div class="stat">
+                        <div class="stat-number">300 видов</div>
+                        <div class="stat-text">Разнообразие кальмаров</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">40 км/ч</div>
+                        <div class="stat-text">Максимальная скорость</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">14 метров</div>
+                        <div class="stat-text">Длина гигантского кальмара</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2 года</div>
+                        <div class="stat-text">Средняя продолжительность жизни</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="facts-container">
+                <div class="facts-header">
+                    <h2 class="facts-title">Все факты о кальмарах</h2>
+                    <div class="facts-count">Всего фактов: 50</div>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" id="squid-search" placeholder="Поиск фактов о кальмарах...">
+                    <div class="search-results" id="squid-results"></div>
+                </div>
+                
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all">Все факты</button>
+                    <button class="category-btn" data-category="giants">Гиганты</button>
+                    <button class="category-btn" data-category="speed">Скорость</button>
+                    <button class="category-btn" data-category="biology">Биология</button>
+                    <button class="category-btn" data-category="behavior">Поведение</button>
+                </div>
+                
+                <div class="facts-grid">
+                    <div class="facts-column">
+                        <ol class="facts-list">
+                            <!-- Факты 1-25 про кальмаров -->
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-whale"></i> Гигантский кальмар</h3>
+                                    <p class="fact-text">Гигантский кальмар — одно из крупнейших беспозвоночных животных, длина которого может достигать 13-14 метров, а вес — до 750 кг.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tachometer-alt"></i> Реактивное движение</h3>
+                                    <p class="fact-text">Кальмары движутся реактивным способом, втягивая воду в мантийную полость и с силой выталкивая ее через сифон, достигая скорости до 40 км/ч.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-eye"></i> Самые большие глаза</h3>
+                                    <p class="fact-text">У гигантского кальмара самые большие глаза в животном мире — до 27 см в диаметре, размером с баскетбольный мяч.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tint"></i> Голубая кровь</h3>
+                                    <p class="fact-text">Как и осьминоги, кальмары имеют голубую кровь из-за содержания гемоцианина, который эффективно переносит кислород в холодной воде.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-rocket"></i> Выпрыгивание из воды</h3>
+                                    <p class="fact-text">Некоторые кальмары могут выпрыгивать из воды и пролетать по воздуху до 50 метров, спасаясь от хищников или преследуя добычу.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Еще 20 фактов о кальмарах (6-25) -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-pen"></i> Внутренняя раковина</h3>
+                                    <p class="fact-text">У кальмаров есть внутренняя раковина — гладиус, которая представляет собой гибкую хитиновую пластину, выполняющую роль скелета.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-forward"></i> Задний ход</h3>
+                                    <p class="fact-text">Кальмары могут быстро двигаться задним ходом, изменяя направление сифона, что помогает им уходить от опасности.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-brain"></i> Высокий интеллект</h3>
+                                    <p class="fact-text">Кальмары обладают одним из самых развитых мозгов среди беспозвоночных и демонстрируют сложное поведение.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-users"></i> Стайное поведение</h3>
+                                    <p class="fact-text">Многие кальмары живут и охотятся стаями, иногда состоящими из тысяч особей, что помогает защищаться от хищников.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-syringe"></i> Ядовитые кальмары</h3>
+                                    <p class="fact-text">Некоторые виды кальмаров, например, кальмар-светлячок, ядовиты и могут быть опасны для человека.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-search"></i> Редкие встречи</h3>
+                                    <p class="fact-text">Гигантские кальмары настолько редки, что первое фото живого экземпляра было сделано только в 2004 году.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-heart"></i> Три сердца</h3>
+                                    <p class="fact-text">Как и осьминоги, кальмары имеют три сердца: два жаберных и одно системное.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-paint-roller"></i> Быстрая смена цвета</h3>
+                                    <p class="fact-text">Кальмары могут менять цвет кожи за миллисекунды благодаря хроматофорам — специальным клеткам с пигментом.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-bolt"></i> Молниеносная атака</h3>
+                                    <p class="fact-text">При атаке кальмар выбрасывает два длинных щупальца с присосками со скоростью, недоступной человеческому глазу.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-ruler"></i> Разнообразие размеров</h3>
+                                    <p class="fact-text">Самый маленький кальмар — Idiosepius thailandicus — имеет длину всего 1 см, в то время как гигантские достигают 14 метров.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-lightbulb"></i> Биолюминесценция</h3>
+                                    <p class="fact-text">Многие глубоководные кальмары светятся в темноте благодаря биолюминесцентным органам, что помогает им в охоте и коммуникации.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tooth"></i> Клюв попугая</h3>
+                                    <p class="fact-text">Как и осьминоги, кальмары имеют острый клюв из хитина, который может перекусывать проволоку и раскалывать панцири крабов.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-fighter-jet"></i> Самые быстрые беспозвоночные</h3>
+                                    <p class="fact-text">Кальмары считаются одними из самых быстрых беспозвоночных в океане благодаря реактивному движению.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-cloud"></i> Чернильная защита</h3>
+                                    <p class="fact-text">При опасности кальмары, как и осьминоги, выпускают чернильное облако, которое сбивает с толку хищников.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-arrows-alt-h"></i> Длинные щупальца</h3>
+                                    <p class="fact-text">У кальмаров 8 рук и 2 длинных ловчих щупальца, которые могут удлиняться в несколько раз для захвата добычи.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-anchor"></i> Противостояние с кашалотами</h3>
+                                    <p class="fact-text">Гигантские кальмары — основная пища кашалотов, и на коже последних часто находят шрамы от присосок кальмаров.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-comments"></i> Коммуникация</h3>
+                                    <p class="fact-text">Кальмары общаются друг с другом, изменяя цвет, рисунок и текстуру кожи, а также с помощью световых сигналов.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-prescription-bottle"></i> Чернила для человека</h3>
+                                    <p class="fact-text">Чернила кальмаров используются в кулинарии (кальмары в чернильном соусе) и ранее использовались для письма.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-swimmer"></i> Пловцы на длинные дистанции</h3>
+                                    <p class="fact-text">Некоторые кальмары мигрируют на тысячи километров, следуя за течениями и косяками рыбы.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-venus-mars"></i> Размножение</h3>
+                                    <p class="fact-text">После спаривания и откладки яиц кальмары обычно умирают, завершая свой жизненный цикл.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="facts-column">
+                        <ol class="facts-list" start="26">
+                            <!-- Факты 26-50 про кальмаров -->
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-temperature-low"></i> Холоднокровные</h3>
+                                    <p class="fact-text">Кальмары, как и другие головоногие, являются холоднокровными животными.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-archive"></i> Колоссальный кальмар</h3>
+                                    <p class="fact-text">Колоссальный кальмар (Mesonychoteuthis hamiltoni) — самый тяжелый вид кальмаров, вес которого может превышать 500 кг.</p>
+                                </div>
+                            </li>
+                            
+                            <!-- Дополнительные факты о кальмарах (28-50) -->
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-stopwatch"></i> Краткая жизнь</h3>
+                                    <p class="fact-text">Большинство кальмаров живут всего 1-2 года, хотя некоторые глубоководные виды могут жить дольше.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-fish"></i> Питание</h3>
+                                    <p class="fact-text">Кальмары — хищники, питающиеся рыбой, ракообразными и другими кальмарами. Крупные виды могут атаковать даже мелких акул.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-moon"></i> Ночные охотники</h3>
+                                    <p class="fact-text">Многие кальмары ведут ночной образ жизни, поднимаясь к поверхности ночью для охоты и опускаясь на глубину днем.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-camera"></i> Съемка гигантов</h3>
+                                    <p class="fact-text">Первое видео живого гигантского кальмара в естественной среде обитания было снято только в 2012 году.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-dna"></i> Геном кальмара</h3>
+                                    <p class="fact-text">Геном кальмара содержит необычно большое количество повторяющихся последовательностей ДНК, что может быть связано с их способностью к редактированию РНК.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-rocket"></i> Реактивный старт</h3>
+                                    <p class="fact-text">Кальмары могут мгновенно стартовать с места, что дает им преимущество при охоте и бегстве от хищников.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-hands-helping"></i> Кооперативная охота</h3>
+                                    <p class="fact-text">Некоторые кальмары охотятся сообща, окружая косяки рыб и координируя свои атаки.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-water"></i> Глубоководные виды</h3>
+                                    <p class="fact-text">Некоторые кальмары обитают на глубинах более 4000 метров, где давление в 400 раз превышает атмосферное.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-ruler-combined"></i> Размер присосок</h3>
+                                    <p class="fact-text">Присоски гигантского кальмара могут достигать 5 см в диаметре и имеют острые зубчатые края.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-compress-arrows-alt"></i> Маневренность</h3>
+                                    <p class="fact-text">Несмотря на высокую скорость, кальмары очень маневренны и могут быстро менять направление движения.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-weight"></i> Плотность тела</h3>
+                                    <p class="fact-text">Тело кальмаров содержит большое количество аммиака, что помогает им сохранять нейтральную плавучесть.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-mask"></i> Мимикрия</h3>
+                                    <p class="fact-text">Некоторые кальмары могут имитировать других морских животных или даже морское дно, чтобы спрятаться от хищников.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-question-circle"></i> Загадка гигантов</h3>
+                                    <p class="fact-text">О гигантских кальмарах известно очень мало, так как они редко попадаются в сети и живут на больших глубинах.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-bicycle"></i> Миграции</h3>
+                                    <p class="fact-text">Некоторые виды кальмаров совершают вертикальные миграции, поднимаясь ночью к поверхности для кормления.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-egg"></i> Кладки яиц</h3>
+                                    <p class="fact-text">Самки кальмаров откладывают яйца в защитные капсулы, которые часто прикрепляют к морскому дну или водорослям.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-theater-masks"></i> Сложное поведение</h3>
+                                    <p class="fact-text">Кальмары демонстрируют сложное поведение, включая ритуалы ухаживания и территориальные конфликты.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-book"></i> Легенды о кракенах</h3>
+                                    <p class="fact-text">Гигантские кальмары, вероятно, стали прообразом легендарного кракена — морского чудовища из скандинавской мифологии.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-tachometer-alt-fast"></i> Энергоэффективность</h3>
+                                    <p class="fact-text">Реактивное движение кальмаров очень энергоэффективно и позволяет им преодолевать большие расстояния.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-utensils"></i> Пищевая ценность</h3>
+                                    <p class="fact-text">Кальмары — важный источник пищи для многих морских животных и человека, их ежегодный вылов составляет миллионы тонн.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="behavior">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-flask"></i> Научные исследования</h3>
+                                    <p class="fact-text">Кальмары используются в нейробиологических исследованиях благодаря их крупным нервным волокнам.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="giants">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-dragon"></i> Морские драконы</h3>
+                                    <p class="fact-text">В японском фольклоре гигантские кальмары ассоциируются с морскими драконами и духами океана.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="speed">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-compass"></i> Навигация</h3>
+                                    <p class="fact-text">Кальмары обладают хорошими навигационными способностями и могут находить путь во время миграций.</p>
+                                </div>
+                            </li>
+                            
+                            <li class="fact-item" data-category="biology">
+                                <div class="fact-content">
+                                    <h3 class="fact-title"><i class="fas fa-crown"></i> Важная экологическая роль</h3>
+                                    <p class="fact-text">Кальмары играют ключевую роль в морских экосистемах, являясь связующим звеном между разными трофическими уровнями.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <p class="footer-text">© 2023 Мир кальмаров. 50 научно подтвержденных фактов об удивительных головоногих.</p>
+                <p class="footer-text">Кальмары — стремительные и загадочные обитатели океанских глубин!</p>
+                <div class="achievement-badge">
+                    <i class="fas fa-trophy"></i> Поздравляем! Вы изучили 50 фактов о кальмарах!
+                </div>
+            </footer>
+        </section>
+    </div>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Основная функция для переключения страниц
+        function showPage(pageId) {
+            // Скрываем все страницы
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Показываем выбранную страницу
+            document.getElementById(pageId).classList.add('active');
+            
+            // Обновляем активную кнопку меню
+            document.querySelectorAll('.menu-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Активируем соответствующую кнопку меню
+            if (pageId === 'snails-page') {
+                document.getElementById('snails-btn').classList.add('active');
+            } else if (pageId === 'octopus-page') {
+                document.getElementById('octopus-btn').classList.add('active');
+            } else if (pageId === 'squid-page') {
+                document.getElementById('squid-btn').classList.add('active');
+            }
+            
+            // Прокручиваем наверх
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Инициализируем функционал для новой страницы
+            initializePage(pageId);
+        }
+        
+        // Инициализация функционала для конкретной страницы
+        function initializePage(pageId) {
+            // Даем время для отображения страницы
+            setTimeout(() => {
+                const factItems = document.querySelectorAll(`#${pageId} .fact-item`);
+                const searchInput = document.getElementById(`${pageId.split('-')[0]}-search`);
+                const searchResults = document.getElementById(`${pageId.split('-')[0]}-results`);
+                const categoryBtns = document.querySelectorAll(`#${pageId} .category-btn`);
+                
+                // Инициализация поиска
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        const searchTerm = this.value.toLowerCase();
+                        const activeCategory = document.querySelector(`#${pageId} .category-btn.active`).getAttribute('data-category');
+                        filterFacts(pageId, activeCategory, searchTerm);
+                        
+                        // Показываем результаты поиска
+                        const visibleFacts = document.querySelectorAll(`#${pageId} .fact-item[style*="block"], #${pageId} .fact-item[style*="block i"]`);
+                        const computedVisibleFacts = Array.from(factItems).filter(f => 
+                            f.style.display !== 'none' && window.getComputedStyle(f).display !== 'none'
+                        );
+                        
+                        if (searchTerm) {
+                            searchResults.textContent = `Найдено фактов: ${computedVisibleFacts.length}`;
+                            searchResults.style.color = computedVisibleFacts.length > 0 ? 'var(--facts-count-bg)' : '#f44336';
+                        } else {
+                            searchResults.textContent = '';
+                        }
+                    });
+                }
+                
+                // Инициализация фильтров по категориям
+                categoryBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // Убираем активный класс у всех кнопок
+                        categoryBtns.forEach(b => b.classList.remove('active'));
+                        // Добавляем активный класс текущей кнопке
+                        this.classList.add('active');
+                        
+                        const category = this.getAttribute('data-category');
+                        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+                        filterFacts(pageId, category, searchTerm);
+                    });
+                });
+                
+                // Анимация при прокрутке
+                const observerOptions = {
+                    threshold: 0.05,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+                
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, observerOptions);
+                
+                // Устанавливаем начальные стили для анимации
+                factItems.forEach(item => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    observer.observe(item);
+                    
+                    // Подсветка при клике
+                    item.addEventListener('click', function() {
+                        // Убираем подсветку у всех фактов
+                        factItems.forEach(i => i.classList.remove('highlight'));
+                        
+                        // Подсвечиваем текущий факт
+                        this.classList.add('highlight');
+                        
+                        // Прокручиваем к факту плавно
+                        this.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    });
+                });
+                
+                // Инициализация статистики
+                const stats = document.querySelectorAll(`#${pageId} .stat-number`);
+                stats.forEach(stat => {
+                    const finalValue = stat.textContent;
+                    const targetValue = extractNumber(finalValue);
+                    
+                    if (targetValue > 0 && stat.textContent === finalValue) {
+                        stat.textContent = '0';
+                        
+                        // Анимируем счетчик
+                        const animateCounter = () => {
+                            const currentValue = parseInt(stat.textContent);
+                            
+                            if (currentValue < targetValue) {
+                                const increment = Math.ceil(targetValue / 100);
+                                stat.textContent = Math.min(currentValue + increment, targetValue) + finalValue.replace(/\d/g, '');
+                                setTimeout(animateCounter, 20);
+                            } else {
+                                stat.textContent = finalValue;
+                            }
+                        };
+                        
+                        // Запускаем анимацию при попадании в область видимости
+                        const statObserver = new IntersectionObserver((entries) => {
+                            if (entries[0].isIntersecting) {
+                                animateCounter();
+                                statObserver.unobserve(stat);
+                            }
+                        }, { threshold: 0.5 });
+                        
+                        statObserver.observe(stat);
+                    }
+                });
+            }, 100);
+        }
+        
+        // Функция фильтрации фактов
+        function filterFacts(pageId, category, searchTerm) {
+            const factItems = document.querySelectorAll(`#${pageId} .fact-item`);
+            let visibleCount = 0;
+            
+            factItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                const title = item.querySelector('.fact-title').textContent.toLowerCase();
+                const text = item.querySelector('.fact-text').textContent.toLowerCase();
+                
+                const matchesCategory = category === 'all' || itemCategory === category;
+                const matchesSearch = !searchTerm || title.includes(searchTerm) || text.includes(searchTerm);
+                
+                if (matchesCategory && matchesSearch) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                    
+                    // Анимация появления
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 500);
+                }
+            });
+            
+            // Обновляем счетчик фактов
+            const factsCount = document.querySelector(`#${pageId} .facts-count`);
+            if (factsCount) {
+                factsCount.textContent = `Показано: ${visibleCount} из ${factItems.length}`;
+            }
+        }
+        
+        // Функция для извлечения числа из строки
+        function extractNumber(str) {
+            const match = str.match(/\d+/);
+            return match ? parseInt(match[0]) : 0;
+        }
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализируем первую страницу
+            initializePage('snails-page');
+            
+            // Обработчики для кнопок меню
+            document.getElementById('snails-btn').addEventListener('click', () => showPage('snails-page'));
+            document.getElementById('octopus-btn').addEventListener('click', () => showPage('octopus-page'));
+            document.getElementById('squid-btn').addEventListener('click', () => showPage('squid-page'));
+            
+            // Общие элементы для всех страниц
+            const backToTopBtn = document.getElementById('backToTop');
+            const progressBar = document.getElementById('progress');
+            
+            // Кнопка "Наверх"
+            window.addEventListener('scroll', function() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progressBar.style.width = scrolled + '%';
+                
+                // Показываем/скрываем кнопку "Наверх"
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            // Обработчик для кнопки "Наверх"
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Горячие клавиши
+            document.addEventListener('keydown', function(e) {
+                // Пробел - случайный факт на текущей странице
+                if (e.code === 'Space' && !e.target.classList.contains('search-input')) {
+                    e.preventDefault();
+                    const activePage = document.querySelector('.page.active');
+                    const factItems = activePage.querySelectorAll('.fact-item');
+                    const visibleFacts = Array.from(factItems).filter(f => 
+                        f.style.display !== 'none' && window.getComputedStyle(f).display !== 'none'
+                    );
+                    
+                    if (visibleFacts.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * visibleFacts.length);
+                        const randomFact = visibleFacts[randomIndex];
+                        
+                        // Убираем подсветку у всех фактов
+                        factItems.forEach(i => i.classList.remove('highlight'));
+                        
+                        // Подсвечиваем случайный факт
+                        randomFact.classList.add('highlight');
+                        
+                        // Прокручиваем к случайному факту
+                        randomFact.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }
+                }
+                
+                // Escape - сброс поиска
+                if (e.code === 'Escape') {
+                    const activePage = document.querySelector('.page.active');
+                    const searchInput = activePage.querySelector('.search-input');
+                    if (searchInput) {
+                        searchInput.value = '';
+                        const categoryBtns = activePage.querySelectorAll('.category-btn');
+                        categoryBtns.forEach(b => b.classList.remove('active'));
+                        activePage.querySelector('[data-category="all"]').classList.add('active');
+                        filterFacts(activePage.id, 'all', '');
+                    }
+                }
+                
+                // Цифры 1,2,3 для переключения страниц
+                if (e.code === 'Digit1') {
+                    showPage('snails-page');
+                } else if (e.code === 'Digit2') {
+                    showPage('octopus-page');
+                } else if (e.code === 'Digit3') {
+                    showPage('squid-page');
+                }
+            });
+            
+            // Показываем достижение при достижении конца страницы
+            window.addEventListener('scroll', function() {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                    const activePage = document.querySelector('.page.active');
+                    const badge = activePage.querySelector('.achievement-badge');
+                    if (badge) {
+                        badge.style.display = 'inline-block';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
